@@ -49,11 +49,12 @@
             url: '/nepadmin/views/family/listData',
             height: 'full-165',
             cols: [[
-                { title: '', type: 'checkbox', fixed: true, width: 60 },
+                {title:'', type:'checkbox', width:'6%'},
+                {type:'numbers', title:'序号', align:'center', width:'6%'},
                 // { title: '状态', templet: '#TPL-list-table-status', width: 80 },
-                { title: '姓名', field: 'name', width: '20%'},
+                { title: '姓名', field: 'name', align:'center', width: '20%'},
                 { title: '地址', field: 'address'},
-                { title: '面积', field: 'area',width: '10%'}
+                { title: '面积', field: 'area',align:'center', width: '10%'}
                 // { title: '商品参数', templet: '#TPL-list-table-params', minWidth: 240 },
                 // { title: '商品单价', templet: '<p><b class="nepadmin-c-red">￥{{d.price}}</b></p>', align: 'center', width: 90 },
                 // { title: '购买数量', templet: '<p><b>{{d.buycount}}</b> <span class="nepadmin-c-gray">件</span></p>', align: 'center', width: 90 },
