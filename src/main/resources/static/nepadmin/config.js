@@ -12,7 +12,7 @@ layui.define(function(exports) {
     //视图所在目录
     views: layui.cache.base + 'views/',
     //是否开启选项卡
-    viewTabs: true,
+    viewTabs: false,
     //显示页面加载条
     viewLoadBar: false,
     //公用加载的样式
@@ -31,25 +31,13 @@ layui.define(function(exports) {
     //本地存储表名
     tableName: 'nepadmin',
     //全局设置 headers 信息
-    requestHeaders: {
-      'Test-User-Agent': 'os=pc;ver=0.0.1;imei=asdasdas'
-    },
+    // requestHeaders: {
+    //   'Test-User-Agent': 'os=pc;ver=0.0.1;imei=asdasdas'
+    // },
     //request 基础URL
     requestUrl: './',
     //独立页面路由，可随意添加（无需写参数）
-    indPage: [
-      '/user/login', //登入页
-      '/user/reg', //注册页
-      '/user/forget' //找回密码
-    ],
-    //登录页面，当未登录或登录失效时进入
-    loginPage: '/user/login',
-    //登录 token 名称，request 请求的时候会带上此参数到 header
-    tokenName: 'token',
-    //是否要强制检查登录状态， 使用tokenName进行登录验证，不通过的话会返回 loginPage 页面
-    loginCheck: true,
-    //根据服务器返回的 HTTP 状态码检查登录过期，设置为false不通过http返回码检查
-    logoutHttpCode: '401',
+
     //全局自定义响应字段
     response: {
       //数据状态的字段名称

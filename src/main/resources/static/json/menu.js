@@ -9,6 +9,9 @@
 		"title":"列表页",
 		"icon": "layui-icon-unorderedlist",
 		"childs":[{
+			"title": "家庭管理",
+			"href":"/family/list"
+		},{
 			"title": "表格列表",
 			"href":"/list/table/id=1"
 		},{
