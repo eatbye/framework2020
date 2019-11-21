@@ -2,6 +2,7 @@ package com.app.app.service;
 
 import com.app.app.model.Family;
 import com.app.sqds.hibernate.HibernateDao;
+import com.app.sqds.util.PageInfo;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,5 +27,11 @@ public class FamilyService extends HibernateDao<Family> {
     @CacheEvict(value = "familyList", allEntries = true)
     public void saveFamily(Family family) {
         getSession().save(family);
+    }
+
+    public PageInfo<Family> familyList(PageInfo<Family> pageInfo){
+        String hql = "from Family order by id desc";
+        pageInfo = list(pageInfo,hql);
+        return pageInfo;
     }
 }

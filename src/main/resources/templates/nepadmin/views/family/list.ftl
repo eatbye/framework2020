@@ -38,6 +38,12 @@
         <span class="layui-badge layui-bg-{{status.color}}">{{ status.title }}</span>
     </script>
 </div>
+
+<script type="text/html" id="table-operate-bar">
+    <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="view">查看</a>
+</script>
+
 <script>
     layui.use(['admin', 'table', 'form', 'dropdown', 'jquery'], function (admin, table, form, dropdown, $) {
         var view = $('#VIEW-list-table');
@@ -52,9 +58,10 @@
                 {title:'', type:'checkbox', width:'6%'},
                 {type:'numbers', title:'序号', align:'center', width:'6%'},
                 // { title: '状态', templet: '#TPL-list-table-status', width: 80 },
-                { title: '姓名', field: 'name', align:'center', width: '20%'},
-                { title: '地址', field: 'address'},
-                { title: '面积', field: 'area',align:'center', width: '10%'}
+                {title: '姓名', field: 'name', align:'center', width: '20%'},
+                {title: '地址', field: 'address'},
+                {title: '面积', field: 'area',align:'center', width: '10%'},
+                {title: '操作', align: 'center', fixed: 'right',  width: '10%', toolbar: '#table-operate-bar'}
                 // { title: '商品参数', templet: '#TPL-list-table-params', minWidth: 240 },
                 // { title: '商品单价', templet: '<p><b class="nepadmin-c-red">￥{{d.price}}</b></p>', align: 'center', width: 90 },
                 // { title: '购买数量', templet: '<p><b>{{d.buycount}}</b> <span class="nepadmin-c-gray">件</span></p>', align: 'center', width: 90 },

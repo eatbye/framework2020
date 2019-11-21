@@ -2,8 +2,7 @@ package com.app.app.web;
 
 import com.app.app.model.Family;
 import com.app.app.service.FamilyService;
-import com.app.sqds.util.Constant;
-import com.app.sqds.util.SqdsResponse;
+import com.app.sqds.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 家庭信息管理
@@ -30,8 +29,13 @@ public class FamilyController {
 
     @RequestMapping("listData")
     @ResponseBody
-    public SqdsResponse listData(){
-        List<Family> familyList = familyService.familyList();
-        return new SqdsResponse().success().data(familyList);
+    public PageData listData(HttpServletRequest request){
+        PageInfo<Family> pageInfo = new PageInfo<Family>();
+        Servlets.initPageInfo(request,pageInfo);
+
+        pageInfo = familyService.familyList(pageInfo);
+
+        return pageInfo.toPageData();
+
     }
 }
