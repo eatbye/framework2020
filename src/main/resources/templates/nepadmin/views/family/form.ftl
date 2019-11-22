@@ -13,23 +13,23 @@
 </style>
 <div class="layui-fluid" id="form">
     <form class="layui-form" action="" lay-filter="job-add-form">
-        <input type="hidden" name="id" value=""/>
+        <input type="hidden" name="id" value="${family.id}"/>
         <div class="layui-form-item">
             <label class="layui-form-label febs-form-item-require">姓名：</label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" value="${family.name}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label febs-form-item-require">地址：</label>
             <div class="layui-input-block">
-                <input type="text" name="address" maxlength="50" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="address" maxlength="50" lay-verify="required" autocomplete="off" class="layui-input" value="${family.address}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">面积：</label>
             <div class="layui-input-block">
-                <input type="text" name="area" autocomplete="off" class="layui-input">
+                <input type="text" name="area" autocomplete="off" class="layui-input" value="${family.area}">
             </div>
         </div>
         <div class="layui-form-item febs-hide" style="display: none">

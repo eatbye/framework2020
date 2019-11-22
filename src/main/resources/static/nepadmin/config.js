@@ -26,7 +26,7 @@ layui.define(function(exports) {
     //默认视图文件名
     entry: '/index',
     //视图文件后缀名
-    engine: '.html',
+    engine: '',
     eventName: 'nepadmin-event',
     //本地存储表名
     tableName: 'nepadmin',

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +29,7 @@ public class FamilyController {
 
     @Autowired private FamilyService familyService;
 
-    @RequestMapping("list.html")
+    @RequestMapping("list")
     public void list(){
         logger.debug("--------------");
     }
@@ -40,9 +41,14 @@ public class FamilyController {
         return pageInfo.toPageData();
     }
 
-    @RequestMapping("form.html")
-    public void form(){
-        logger.debug("form...");
+    @RequestMapping("form")
+    public void form(ModelMap modelMap){
+        int id = ParamUtils.getInt("id",0);
+        Family family = familyService.get(id);
+        if(family==null){
+            family = new Family();
+        }
+        modelMap.addAttribute("family", family);
     }
 
     @RequestMapping("save")

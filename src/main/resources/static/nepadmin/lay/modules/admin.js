@@ -357,7 +357,7 @@ layui
     self.modal.open = function (title, url, params) {
       params = $.extend({
         url: url,
-        maxmin: true,
+        maxmin: false,
         shadeClose: false,
         title: [
           (title || '请填写头部信息'),
@@ -396,6 +396,7 @@ layui
         area: ['90%', '90%'], //宽高
         shadeClose: true
       }
+      // alert(url);
 
       if (self.isUrl(url)) {
         params.type = 2

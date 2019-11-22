@@ -115,17 +115,24 @@ layui
         return str.replace(new RegExp('(^' + symbol + '*)', 'g'), '')
       }
        */
-      self.loadHtml = function(url, callback) {
+       self.loadHtml= function(url, callback) {
         url = url || conf.entry
         loadBar.start()
-        var queryIndex = url.indexOf('?')
-        if (queryIndex !== -1) url = url.slice(0, queryIndex)
+        var queryIndex = url.indexOf('?');
+        var letter = "?";
+        if(queryIndex != -1){
+          letter = "&";
+        }
+        // if (queryIndex !== -1) url = url.slice(0, queryIndex)
+
+
         $.ajax({
           url:
             (url.indexOf(conf.base) === 0 ? '' : conf.views) +
             url +
-            conf.engine +
-            '?v=' +
+              letter+
+            // conf.engine +
+            'v=' +
             layui.cache.version,
           type: 'get',
           dataType: 'html',

@@ -54,6 +54,8 @@
 
         var tableFilter = 'list-table';
         form.render();
+
+        //表格
         var tableIns = table.render({
             elem: '[lay-filter="' + tableFilter + '"]',
             url: '/nepadmin/views/family/listData',
@@ -72,13 +74,37 @@
                 // { field: 'time', title: '操作时间', templet: '<p><span title="{{d.time}}" class="nepadmin-c-gray">{{ layui.util.timeAgo(d.time)}}</span></p>', align: 'center', width: 170 }
             ]]
         });
+
+        table.on('tool(list-table)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            if (layEvent === 'del') {
+                febs.modal.confirm('删除任务', '确定删除该任务？', function () {
+                    deleteJobs(data.jobId);
+                });
+            }
+            if (layEvent === 'edit') {
+                admin.modal.open('修改家庭信息', 'family/form?id='+data.id, {
+                    area: $(window).width() <= 750 ? '90%' : '50%',
+                    btn: ['提交', '取消'],
+                    yes: function (index, layero) {
+                        $('#form').find('#submit').trigger('click');
+                    },
+                    btn2: function () {
+                        layer.closeAll();
+                    }
+                });
+            }
+        });
         // alert(tableIns);
 
+        //查询功能
         query.on('click', function () {
             var params = $.extend(getQueryParams(), {});
             tableIns.reload({where: params, page: {curr: 1}});
         });
 
+        //新增
         add.on('click', function () {
             admin.modal.open('家庭管理', 'family/form', {
                 area: $(window).width() <= 750 ? '90%' : '50%',
@@ -92,6 +118,7 @@
             });
         });
 
+        //搜索数据，可以进一步优化
         function getQueryParams() {
             return {
                 name: $("#name").val(),
