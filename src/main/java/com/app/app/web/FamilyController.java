@@ -71,4 +71,12 @@ public class FamilyController {
         form(modelMap);
         logger.debug("view");
     }
+
+    @RequestMapping("delete")
+    @ResponseBody
+    public SqdsResponse delete() {
+        int id = ParamUtils.getInt("id",0);
+        familyService.delete(id);
+        return new SqdsResponse().success();
+    }
 }

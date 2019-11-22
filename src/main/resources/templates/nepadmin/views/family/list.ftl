@@ -43,6 +43,8 @@
 <script type="text/html" id="table-operate-bar">
     <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="edit">修改</a>
     <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="view">查看</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs"  data-type="test8" lay-event="del">删除</a>
+
 </script>
 
 <script>
@@ -67,7 +69,7 @@
                 {title: '姓名', field: 'name', align:'center', width: '20%'},
                 {title: '地址', field: 'address'},
                 {title: '面积', field: 'area',align:'center', width: '10%'},
-                {title: '操作', align: 'center', fixed: 'right',  width: '10%', toolbar: '#table-operate-bar'}
+                {title: '操作', align: 'center', fixed: 'right',  width: '15%', toolbar: '#table-operate-bar'}
                 // { title: '商品参数', templet: '#TPL-list-table-params', minWidth: 240 },
                 // { title: '商品单价', templet: '<p><b class="nepadmin-c-red">￥{{d.price}}</b></p>', align: 'center', width: 90 },
                 // { title: '购买数量', templet: '<p><b>{{d.buycount}}</b> <span class="nepadmin-c-gray">件</span></p>', align: 'center', width: 90 },
@@ -78,11 +80,7 @@
         table.on('tool(list-table)', function (obj) {
             var data = obj.data;
             var layEvent = obj.event;
-            if (layEvent === 'del') {
-                febs.modal.confirm('删除任务', '确定删除该任务？', function () {
-                    deleteJobs(data.jobId);
-                });
-            }
+
             if (layEvent === 'edit') {
                 admin.modal.open('修改家庭信息', 'family/form?id='+data.id, {
                     area: $(window).width() <= 750 ? '90%' : '50%',
@@ -102,6 +100,14 @@
                     yes: function (index, layero) {
                         layer.closeAll();
                     }
+                });
+            }
+            if (layEvent === 'del') {
+                admin.modal.confirm('删除家庭', '确定删除该家庭吗？', function () {
+                    admin.get('/nepadmin/views/family/delete?id='+data.id, null, function () {
+                        admin.alert.success('删除家庭成功');
+                        query.click();
+                    });
                 });
             }
         });
