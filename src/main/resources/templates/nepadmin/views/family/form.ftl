@@ -14,6 +14,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">生日：</label>
+            <div class="layui-input-block">
+                <input type="text" name="birthday" autocomplete="off" class="layui-input" value="${family.birthday}">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">面积：</label>
             <div class="layui-input-block">
                 <input type="text" name="area" autocomplete="off" class="layui-input" value="${family.area}">

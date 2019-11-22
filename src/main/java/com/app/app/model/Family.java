@@ -2,6 +2,7 @@ package com.app.app.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name="family")
@@ -10,7 +11,9 @@ public class Family {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String city;
     private String address;
+    private Date birthday;
     private BigDecimal area;
 
     public Integer getId() {
@@ -29,6 +32,14 @@ public class Family {
         this.name = name;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -37,21 +48,19 @@ public class Family {
         this.address = address;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public BigDecimal getArea() {
         return area;
     }
 
     public void setArea(BigDecimal area) {
         this.area = area;
-    }
-
-    @Override
-    public String toString() {
-        return "Family{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", area=" + area +
-                '}';
     }
 }

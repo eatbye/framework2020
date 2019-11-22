@@ -20,7 +20,6 @@
                         </form>
                     </div>
                     <table class="layui-table" id="list-table" lay-filter="list-table"></table>
-<#--                    <table class="layui-table" lay-even lay-skin="line" id="list-table" lay-filter="list-table"></table>-->
                 </div>
             </div>
         </div>
@@ -61,7 +60,7 @@
         //表格
         var tableIns = table.render({
             elem: '[lay-filter="' + tableFilter + '"]',
-            url: '/nepadmin/views/family/listData',
+            url: '${basePath}family/listData',
             height: 'full-165',
             cols: [[
                 {title:'', type:'checkbox', width:'6%'},
@@ -101,7 +100,7 @@
             }
             if (layEvent === 'del') {
                 admin.modal.confirm('删除家庭', '确定删除该家庭吗？', function () {
-                    admin.get('/nepadmin/views/family/delete?id='+data.id, null, function () {
+                    admin.get('${basePath}family/delete?id='+data.id, null, function () {
                         admin.alert.success('删除家庭成功');
                         query.click();
                     });
