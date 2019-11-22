@@ -1,5 +1,6 @@
 package com.app.sqds.config;
 
+import com.app.sqds.freemarker.DictValueEx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class FreemarkerConfig {
     @PostConstruct
     public void setConfigure() throws Exception {
         configuration.setSharedVariable("basePath", "/nepadmin/views/");
+        configuration.setSharedVariable("dictValue", new DictValueEx());
+
         logger.debug("freemarker配置");
     }
 

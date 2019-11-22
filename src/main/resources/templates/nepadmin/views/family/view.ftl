@@ -11,6 +11,10 @@
             <td>地址</td>
             <td style="text-align: left" colspan="3">${family.address}</td>
         </tr>
+        <tr>
+            <td>测试</td>
+            <td style="text-align: left" colspan="3">${dictValue('性别','2')}</td>
+        </tr>
         </tbody>
     </table>
 
