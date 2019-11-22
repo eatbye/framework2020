@@ -18,6 +18,20 @@
 			"title": "卡片列表",
 			"href":"/list/card"
 		}]
+	},
+	{
+		"title":"系统管理",
+		"icon": "layui-icon-experiment",
+		"childs":[{
+			"title": "数据字典管理",
+			"href":"/system/dict/list"
+		},{
+			"title": "表格列表",
+			"href":"/list/table/id=1"
+		},{
+			"title": "卡片列表",
+			"href":"/list/card"
+		}]
 	},{
 		"title":"详情页",
 		"icon": "layui-icon-container",
@@ -52,7 +66,7 @@
 			"href":"/exception/500"
 		}]
 	},{
-		"title": "新增模块",
+		"title": "系统管理",
 		"icon": "layui-icon-experiment",
 		"notice":3,
 		"childs":[{
