@@ -20,6 +20,10 @@ public class Servlets {
         Enumeration<String> enumeration = request.getParameterNames();
         while (enumeration.hasMoreElements()) {
             String name = enumeration.nextElement();
+            logger.debug("name = {}",name);
+            String value = ParamUtils.getString(request,name,"");
+            pageInfo.getPostValue().put(name, value);
+            /*
             if (name.startsWith("_")) {
                 if (name.equals("_orderBy")) {
                     pageInfo.setOrderBy(ParamUtils.getString(request, name, ""));
@@ -36,6 +40,8 @@ public class Servlets {
 //                pageInfo.setPostValue(searchParams);
 
             }
+
+             */
         }
     }
 

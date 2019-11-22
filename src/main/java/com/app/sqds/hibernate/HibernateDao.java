@@ -8,7 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
 import org.hibernate.internal.CriteriaImpl;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.hibernate.transform.ResultTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -227,7 +227,50 @@ public class HibernateDao<T> {
         pageInfo.setResult(q.list());
         return pageInfo;
     }
+    /*
+    public PageInfo<T> list(PageInfo<T> pageInfo, String hql, Map queryData) {
 
+        DynamicHql dynamicHql = getDynamicHql(pageInfo.getPostValue());
+
+        logger.debug("dynamicHql=" + dynamicHql.getHql());
+
+        String compileHql = compileHql(dynamicHql, hql, pageInfo.getOrderField(), pageInfo.getOrderType());
+
+        logger.debug("compileHql=" + compileHql);
+
+        List<Object> queryParameter = dynamicHql.getQueryData();
+
+        Object[] queryValues = values;
+
+        List<Object> dynamicQueryValues = new Vector<Object>();
+
+        for (Object o : queryValues) {
+            dynamicQueryValues.add(o);
+        }
+        for (Object o : queryParameter) {
+            dynamicQueryValues.add(o);
+        }
+
+        if (pageInfo.isAutoCount()) {
+            long total = countQueryResult(compileHql, dynamicQueryValues.toArray());
+            pageInfo.setTotalCount((int) total);
+            //如果记录数为0，不需要进行分页查询了
+            if (total == 0) {
+                pageInfo.setResult(new Vector());
+                return pageInfo;
+            }
+        }
+        Query q = createQuery(compileHql, dynamicQueryValues.toArray());
+        if (pageInfo.isFirstSetted()) {
+            q.setFirstResult(pageInfo.getFirst());
+        }
+        if (pageInfo.isPageSizeSetted()) {
+            q.setMaxResults(pageInfo.getPageSize());
+        }
+        pageInfo.setResult(q.list());
+        return pageInfo;
+    }
+    */
 
     public Long findLong(PageInfo<T> pageInfo, String hql, Object... values) {
 

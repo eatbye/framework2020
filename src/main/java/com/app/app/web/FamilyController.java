@@ -30,11 +30,14 @@ public class FamilyController {
     @RequestMapping("listData")
     @ResponseBody
     public PageData listData(HttpServletRequest request){
+        String name = ParamUtils.getString(request,"name","");
+        String address = ParamUtils.getString(request,"address","");
+
+        logger.debug("name = {}, address = {}", name, address);
+
         PageInfo<Family> pageInfo = new PageInfo<Family>();
         Servlets.initPageInfo(request,pageInfo);
-
         pageInfo = familyService.familyList(pageInfo);
-
         return pageInfo.toPageData();
 
     }

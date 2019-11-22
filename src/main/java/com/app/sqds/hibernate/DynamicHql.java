@@ -1,8 +1,8 @@
 package com.app.sqds.hibernate;
 
 import com.app.sqds.util.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,8 +13,7 @@ import java.util.Vector;
  * Created by cai on 2016/2/19.
  */
 public class DynamicHql {
-    private Logger logger = LogManager.getLogger(DynamicHql.class);
-
+    private Logger logger = LoggerFactory.getLogger(DynamicHql.class);
     private Collection<SearchFilter> filters;
     private String hql;
     private List<Object> queryData;

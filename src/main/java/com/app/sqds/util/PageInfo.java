@@ -341,4 +341,12 @@ public class PageInfo<T> {
         pageData.setCount(getTotalCount());
         return pageData;
     }
+
+    public String getPostStringValue(String name){
+        String value = (String)postValue.get(name);
+        if(value == null){
+            value = "";
+        }
+        return value;
+    }
 }

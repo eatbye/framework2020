@@ -3,6 +3,7 @@ package com.app.app.service;
 import com.app.app.model.Family;
 import com.app.sqds.hibernate.HibernateDao;
 import com.app.sqds.util.PageInfo;
+import com.app.sqds.util.StringUtils;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 @Service
 public class FamilyService extends HibernateDao<Family> {
@@ -30,7 +34,23 @@ public class FamilyService extends HibernateDao<Family> {
     }
 
     public PageInfo<Family> familyList(PageInfo<Family> pageInfo){
-        String hql = "from Family order by id desc";
+        List<Object> dataList = new Vector<>();
+//        Map<String,Object> queryData = new HashMap<>();
+
+        String hql = "from Family where";
+        String name = pageInfo.getPostStringValue("name");
+        if(StringUtils.isNotEmpty(name)){
+            hql += " name like ? and ";
+            dataList.add("%"+name+"%");
+//            queryData.put("name","%"+name+"%");
+        }
+        String address = pageInfo.getPostStringValue("address");
+        if(StringUtils.isNotEmpty(address)){
+            hql += " address like ? and ";
+            dataList.add("%"+address+"%");
+//            queryData.put("address","%"+address+"%");
+        }
+        hql += " 1=1 order by id desc";
         pageInfo = list(pageInfo,hql);
         return pageInfo;
     }

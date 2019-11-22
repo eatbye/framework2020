@@ -8,13 +8,13 @@
                     <div class="test-table-reload-btn" style="margin:10px">
                         姓名：
                         <div class="layui-inline">
-                            <input class="layui-input" name="id" autocomplete="off" style="height: 30px;">
+                            <input class="layui-input" name="name" id="name" autocomplete="off" style="height: 30px;">
                         </div>
                         地址：
                         <div class="layui-inline">
-                            <input class="layui-input" name="id" autocomplete="off" style="height: 30px;">
+                            <input class="layui-input" name="address" id="address" autocomplete="off" style="height: 30px;">
                         </div>
-                        <button class="layui-btn layui-btn-sm">搜索</button>
+                        <button class="layui-btn layui-btn-sm" id="query">搜索</button>
                     </div>
                     <table class="layui-table" id="list-table" lay-filter="list-table"></table>
 <#--                    <table class="layui-table" lay-even lay-skin="line" id="list-table" lay-filter="list-table"></table>-->
@@ -46,11 +46,13 @@
 
 <script>
     layui.use(['admin', 'table', 'form', 'dropdown', 'jquery'], function (admin, table, form, dropdown, $) {
-        var view = $('#VIEW-list-table');
+        var $ = layui.jquery,
+            view = $('#VIEW-list-table'),
+            query = $("#query");
 
         var tableFilter = 'list-table';
         form.render();
-        table.render({
+        var tableIns = table.render({
             elem: '[lay-filter="' + tableFilter + '"]',
             url: '/nepadmin/views/family/listData',
             height: 'full-165',
@@ -68,7 +70,23 @@
                 // { field: 'time', title: '操作时间', templet: '<p><span title="{{d.time}}" class="nepadmin-c-gray">{{ layui.util.timeAgo(d.time)}}</span></p>', align: 'center', width: 170 }
             ]]
         });
+        // alert(tableIns);
 
+        query.on('click', function () {
+            // var test = getQueryParams();
+            // alert(test);
+            var params = $.extend(getQueryParams(), {});
+            // alert(params);
+            tableIns.reload({where: params, page: {curr: 1}});
+        });
+
+        function getQueryParams() {
+            return {
+                name: $("#name").val(),
+                address: $("#address").val(),
+                invalidate_ie_cache: new Date()
+            };
+        }
 
         dropdown.render({
             elem: view.find('.action-more'),
