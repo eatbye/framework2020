@@ -15,6 +15,7 @@
                             <input class="layui-input" name="address" id="address" autocomplete="off" style="height: 30px;">
                         </div>
                         <button class="layui-btn layui-btn-sm" id="query">搜索</button>
+                        <button class="layui-btn layui-btn-sm" id="add">登记</button>
                     </div>
                     <table class="layui-table" id="list-table" lay-filter="list-table"></table>
 <#--                    <table class="layui-table" lay-even lay-skin="line" id="list-table" lay-filter="list-table"></table>-->
@@ -73,10 +74,7 @@
         // alert(tableIns);
 
         query.on('click', function () {
-            // var test = getQueryParams();
-            // alert(test);
             var params = $.extend(getQueryParams(), {});
-            // alert(params);
             tableIns.reload({where: params, page: {curr: 1}});
         });
 
@@ -84,7 +82,7 @@
             return {
                 name: $("#name").val(),
                 address: $("#address").val(),
-                invalidate_ie_cache: new Date()
+                invalidate_ie_cache: new Date().getTime()
             };
         }
 
