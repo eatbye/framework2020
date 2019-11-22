@@ -1,17 +1,4 @@
-<style>
-    #job-add {
-        padding: 20px 25px 25px 0;
-    }
-
-    #job-add .layui-form-label {
-        width: 88px;
-    }
-
-    #job-add .layui-input-block {
-        margin-left: 120px;
-    }
-</style>
-<div class="layui-fluid" id="form">
+<div class="layui-fluid" id="form" style="margin-top:10px">
     <form class="layui-form" action="" lay-filter="job-add-form">
         <input type="hidden" name="id" value="${family.id}"/>
         <div class="layui-form-item">
