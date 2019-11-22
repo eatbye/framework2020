@@ -3,7 +3,10 @@ package com.app.sqds.util;
 import com.app.sqds.exception.SqdsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +41,8 @@ public class PageInfo<T> {
     private Map<String,Object> postValue = new HashMap<String,Object>(); //存放查询条件
 
     public PageInfo(){
-        //addParameter("orderby", "");
-        //addParameter("order", "");
+        HttpServletRequest request =((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Servlets.initPageInfo(request, this);
     }
     /**
      * 获得每页的记录数量,无默认值.

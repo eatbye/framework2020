@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,16 +31,8 @@ public class FamilyController {
 
     @RequestMapping("listData")
     @ResponseBody
-    public PageData listData(HttpServletRequest request){
-        String name = ParamUtils.getString(request,"name","");
-        String address = ParamUtils.getString(request,"address","");
-
-        logger.debug("name = {}, address = {}", name, address);
-
-        PageInfo<Family> pageInfo = new PageInfo<Family>();
-        Servlets.initPageInfo(request,pageInfo);
+    public PageData listData(PageInfo<Family> pageInfo){
         pageInfo = familyService.familyList(pageInfo);
         return pageInfo.toPageData();
-
     }
 }
