@@ -1,5 +1,8 @@
 package com.app.sqds.util;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -13,17 +16,21 @@ public class ParamUtils {
     private ParamUtils() {
     }
 
+    public static HttpServletRequest getRequest(){
+        HttpServletRequest request =((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        return request;
+    }
+
     /**
      * 取得表单提交的数据，返回字符类型
      *
-     * @param request
      * @param s             表单域名称
      * @param defaultString 默认值
      * @return
      * @throws Exception
      */
-    public static String getString(ServletRequest request, String s, String defaultString) {
-        String s1 = getStringValues(request, s);
+    public static String getString(String s, String defaultString) {
+        String s1 = getStringValues(s);
         if (s1 == null || "".equals(s1)) {
             return defaultString;
         } else {
@@ -33,16 +40,14 @@ public class ParamUtils {
 
     /**
      * 取得表单提交的数据，返回数值型
-     *
-     * @param request
      * @param s
      * @param defaultInt
      * @return
      */
-    public static int getInt(ServletRequest request, String s, int defaultInt) {
+    public static int getInt(String s, int defaultInt) {
         int j = 0;
         try {
-            String temp = getString(request, s);
+            String temp = getString(s);
             if (temp == null) {
                 j = defaultInt;
             } else if (temp.trim().equals("")) {
@@ -66,7 +71,7 @@ public class ParamUtils {
      * @return
      */
     public static Integer getInteger(ServletRequest request, String s, int defaultInt) {
-        int v = ParamUtils.getInt(request, s, defaultInt);
+        int v = ParamUtils.getInt(s, defaultInt);
         if (v == defaultInt) {
             return null;
         } else {
@@ -86,7 +91,7 @@ public class ParamUtils {
     public static long getLong(ServletRequest request, String s, long defaultLong) {
         long l = 0;
         try {
-            String temp = getString(request, s);
+            String temp = getString( s);
             if (temp == null) {
                 l = defaultLong;
             } else {
@@ -110,7 +115,7 @@ public class ParamUtils {
     public static float getFloat(HttpServletRequest request, String s, float defaultFloat) {
         float l = 0;
         try {
-            String temp = getString(request, s);
+            String temp = getString( s);
             if (temp == null) {
                 l = defaultFloat;
             } else {
@@ -133,7 +138,7 @@ public class ParamUtils {
     public static double getDouble(HttpServletRequest request, String s, double defaultDouble) {
         double l = 0;
         try {
-            String temp = getString(request, s);
+            String temp = getString( s);
             if (temp == null) {
                 l = defaultDouble;
             } else {
@@ -157,7 +162,7 @@ public class ParamUtils {
     public static BigDecimal getDecimal(HttpServletRequest request, String s, double defaultDouble) {
         BigDecimal l = null;
         try {
-            String temp = getString(request, s);
+            String temp = getString(s);
             if (temp == null) {
                 //				l = defaultDouble;
                 l = null;
@@ -173,13 +178,11 @@ public class ParamUtils {
 
     /**
      * 取得字符数组，通常用于checkbox取值
-     *
-     * @param request
      * @param name
      * @return
      */
-    public static String[] getStringParameters(ServletRequest request, String name) {
-        String[] array = request.getParameterValues(name);
+    public static String[] getStringParameters(String name) {
+        String[] array = getRequest().getParameterValues(name);
         if (array == null) {
             return new String[0];
         }
@@ -192,8 +195,8 @@ public class ParamUtils {
      * @param name
      * @return
      */
-    public static int[] getIntParameters(ServletRequest request, String name) {
-        String[] array = ParamUtils.getStringParameters(request, name);
+    public static int[] getIntParameters(String name) {
+        String[] array = ParamUtils.getStringParameters(name);
         int[] intArray = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             intArray[i] = Integer.parseInt(array[i]);
@@ -201,20 +204,20 @@ public class ParamUtils {
         return intArray;
     }
 
-    private static String getString(ServletRequest request, String s) {
+    private static String getString(String s) {
         String temp = null;
         try {
-            temp = request.getParameter(s);
+            temp = getRequest().getParameter(s);
         } catch (Exception exception) {
             System.out.println(exception);
         }
         return temp;
     }
 
-    private static String getStringValues(ServletRequest request, String s) {
+    private static String getStringValues(String s) {
         String[] temp = null;
         try {
-            temp = request.getParameterValues(s);
+            temp = getRequest().getParameterValues(s);
         } catch (Exception exception) {
             System.out.println(exception);
         }

@@ -41,8 +41,7 @@ public class PageInfo<T> {
     private Map<String,Object> postValue = new HashMap<String,Object>(); //存放查询条件
 
     public PageInfo(){
-        HttpServletRequest request =((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Servlets.initPageInfo(request, this);
+        Servlets.initPageInfo(this);
     }
     /**
      * 获得每页的记录数量,无默认值.

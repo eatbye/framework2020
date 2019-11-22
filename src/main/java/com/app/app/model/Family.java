@@ -44,4 +44,14 @@ public class Family {
     public void setArea(BigDecimal area) {
         this.area = area;
     }
+
+    @Override
+    public String toString() {
+        return "Family{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", area=" + area +
+                '}';
+    }
 }

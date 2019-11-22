@@ -1,4 +1,4 @@
-<div class="layui-fluid" id="VIEW-list-table" lay-title="家庭信息管理">
+<div class="layui-fluid" id="familyList" lay-title="家庭信息管理">
     <div class="layui-row layui-col-space12">
         <div class="layui-col-md12">
             <div class="layui-card">
@@ -48,8 +48,9 @@
 <script>
     layui.use(['admin', 'table', 'form', 'dropdown', 'jquery'], function (admin, table, form, dropdown, $) {
         var $ = layui.jquery,
-            view = $('#VIEW-list-table'),
-            query = $("#query");
+            view = $('#familyList'),
+            query = $("#query"),
+            add = $("#add");
 
         var tableFilter = 'list-table';
         form.render();
@@ -76,6 +77,19 @@
         query.on('click', function () {
             var params = $.extend(getQueryParams(), {});
             tableIns.reload({where: params, page: {curr: 1}});
+        });
+
+        add.on('click', function () {
+            admin.modal.open('家庭管理', 'family/form', {
+                area: $(window).width() <= 750 ? '90%' : '50%',
+                btn: ['提交', '取消'],
+                yes: function (index, layero) {
+                    $('#form').find('#submit').trigger('click');
+                },
+                btn2: function () {
+                    layer.closeAll();
+                }
+            });
         });
 
         function getQueryParams() {
