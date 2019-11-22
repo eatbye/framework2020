@@ -381,6 +381,15 @@ layui
       self.popup(params);
     };
 
+    self.form2json = function(formId){
+      var paramArray = $('#' + formId).serializeArray();
+      var jsonObj={};
+      $(paramArray).each(function(){
+        jsonObj[this.name]=this.value;
+      });
+      return jsonObj;
+    }
+
     self.isUrl = function(str) {
       return /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/.test(
         str
@@ -404,6 +413,8 @@ layui
         layer.open($.extend(defaultParams, params))
         return
       }
+
+
 
       view.tab.del(url)
 

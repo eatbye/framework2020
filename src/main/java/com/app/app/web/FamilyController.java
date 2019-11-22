@@ -6,18 +6,10 @@ import com.app.sqds.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.Enumeration;
 
 /**
  * 家庭信息管理
@@ -45,7 +37,7 @@ public class FamilyController {
     public void form(ModelMap modelMap){
         int id = ParamUtils.getInt("id",0);
         Family family = familyService.get(id);
-        if(family==null){
+        if(family == null){
             family = new Family();
         }
         modelMap.addAttribute("family", family);
@@ -60,7 +52,6 @@ public class FamilyController {
             family = new Family();
         }
         Servlets.bind(family);
-        logger.debug("family = {}", family);
         familyService.save(family);
 
         return new SqdsResponse().success();
@@ -69,7 +60,6 @@ public class FamilyController {
     @RequestMapping("view")
     public void view(ModelMap modelMap){
         form(modelMap);
-        logger.debug("view");
     }
 
     @RequestMapping("delete")

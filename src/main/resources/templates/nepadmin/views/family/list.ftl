@@ -6,6 +6,7 @@
                     <div class="layui-card-header"><b>家庭信息管理</b></div>
 
                     <div class="test-table-reload-btn" style="margin:10px">
+                        <form id="queryForm">
                         姓名：
                         <div class="layui-inline">
                             <input class="layui-input" name="name" id="name" autocomplete="off" style="height: 30px;">
@@ -14,8 +15,9 @@
                         <div class="layui-inline">
                             <input class="layui-input" name="address" id="address" autocomplete="off" style="height: 30px;">
                         </div>
-                        <button class="layui-btn layui-btn-sm" id="query">搜索</button>
-                        <button class="layui-btn layui-btn-sm" id="add">登记</button>
+                        <button class="layui-btn layui-btn-sm" id="query" type="button">搜索</button>
+                        <button class="layui-btn layui-btn-sm" id="add" type="button">登记</button>
+                        </form>
                     </div>
                     <table class="layui-table" id="list-table" lay-filter="list-table"></table>
 <#--                    <table class="layui-table" lay-even lay-skin="line" id="list-table" lay-filter="list-table"></table>-->
@@ -44,7 +46,6 @@
     <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="edit">修改</a>
     <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="view">查看</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs"  data-type="test8" lay-event="del">删除</a>
-
 </script>
 
 <script>
@@ -69,11 +70,7 @@
                 {title: '姓名', field: 'name', align:'center', width: '20%'},
                 {title: '地址', field: 'address'},
                 {title: '面积', field: 'area',align:'center', width: '10%'},
-                {title: '操作', align: 'center', fixed: 'right',  width: '15%', toolbar: '#table-operate-bar'}
-                // { title: '商品参数', templet: '#TPL-list-table-params', minWidth: 240 },
-                // { title: '商品单价', templet: '<p><b class="nepadmin-c-red">￥{{d.price}}</b></p>', align: 'center', width: 90 },
-                // { title: '购买数量', templet: '<p><b>{{d.buycount}}</b> <span class="nepadmin-c-gray">件</span></p>', align: 'center', width: 90 },
-                // { field: 'time', title: '操作时间', templet: '<p><span title="{{d.time}}" class="nepadmin-c-gray">{{ layui.util.timeAgo(d.time)}}</span></p>', align: 'center', width: 170 }
+                {title: '操作', align: 'center', fixed: 'right',  width: 170, toolbar: '#table-operate-bar'}
             ]]
         });
 
@@ -111,11 +108,10 @@
                 });
             }
         });
-        // alert(tableIns);
 
         //查询功能
         query.on('click', function () {
-            var params = $.extend(getQueryParams(), {});
+            var params = $.extend(admin.form2json("queryForm"), {});
             tableIns.reload({where: params, page: {curr: 1}});
         });
 
@@ -132,56 +128,6 @@
                 }
             });
         });
-
-        //搜索数据，可以进一步优化
-        function getQueryParams() {
-            return {
-                name: $("#name").val(),
-                address: $("#address").val(),
-                invalidate_ie_cache: new Date().getTime()
-            };
-        }
-
-        dropdown.render({
-            elem: view.find('.action-more'),
-            click: function (name, elem, event) {
-                console.log('点击了' + name);
-            },
-            options: [{
-                name: 'action1',
-                title: 'Menu 1'
-            }, {
-                name: 'action2',
-                title: 'Menu 2',
-                options: [{
-                    name: 'action3',
-                    title: 'Menu 3',
-                }, {
-                    name: 'action4',
-                    title: 'Menu 4',
-                }]
-            }]
-        });
-
-        view.find('.table-action').click(function () {
-            var type = $(this).attr('data-type')
-            if (type == 'refresh') {
-                //刷新当前页
-                layui.view.tab.refresh()
-
-                //刷新一个指定页，不用传入页面的参数
-                //layui.view.tab.refresh('/index')
-
-                return false;
-            }
-            var checkedCount = table.checkStatus(tableFilter).data.length;
-            if (checkedCount == 0) {
-                layer.msg('请先选择某行');
-            } else {
-                layer.msg($(this).html() + checkedCount + '项');
-            }
-        })
-
 
     })
 </script>
