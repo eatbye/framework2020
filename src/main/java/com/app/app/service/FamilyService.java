@@ -35,23 +35,20 @@ public class FamilyService extends HibernateDao<Family> {
 
     public PageInfo<Family> familyList(PageInfo<Family> pageInfo){
         List<Object> dataList = new Vector<>();
-//        Map<String,Object> queryData = new HashMap<>();
 
         String hql = "from Family where";
         String name = pageInfo.getPostStringValue("name");
         if(StringUtils.isNotEmpty(name)){
             hql += " name like ? and ";
             dataList.add("%"+name+"%");
-//            queryData.put("name","%"+name+"%");
         }
         String address = pageInfo.getPostStringValue("address");
         if(StringUtils.isNotEmpty(address)){
             hql += " address like ? and ";
             dataList.add("%"+address+"%");
-//            queryData.put("address","%"+address+"%");
         }
         hql += " 1=1 order by id desc";
-        pageInfo = list(pageInfo,hql);
+        pageInfo = list(pageInfo, hql, dataList.toArray());
         return pageInfo;
     }
 }
