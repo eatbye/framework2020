@@ -95,6 +95,15 @@
                     }
                 });
             }
+            if (layEvent === 'view') {
+                admin.modal.open('查看家庭信息', 'family/view?id='+data.id, {
+                    area: $(window).width() <= 750 ? '90%' : '50%',
+                    btn: ['关闭'],
+                    yes: function (index, layero) {
+                        layer.closeAll();
+                    }
+                });
+            }
         });
         // alert(tableIns);
 

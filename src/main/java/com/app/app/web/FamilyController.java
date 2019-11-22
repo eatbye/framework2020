@@ -65,4 +65,10 @@ public class FamilyController {
 
         return new SqdsResponse().success();
     }
+
+    @RequestMapping("view")
+    public void view(ModelMap modelMap){
+        form(modelMap);
+        logger.debug("view");
+    }
 }

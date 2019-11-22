@@ -43,7 +43,7 @@
         form.on('submit', function (data) {
             admin.post('/nepadmin/views/family/save', data.field, function () {
                 layer.closeAll();
-                admin.alert.success('家庭信息登记完成');
+                admin.alert.success('家庭信息保存完成');
                 $('#familyList').find('#query').click();
             });
             return false;
