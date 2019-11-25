@@ -42,8 +42,9 @@
             elem: '[lay-filter="' + tableFilter + '"]',
             url: '${basePath}system/dict/listData',
             height: 'full-165',
+            page: false,
             cols: [[
-                {title:'', type:'checkbox', width:60},
+                // {title:'', type:'checkbox', width:60},
                 {type:'numbers', title:'序号', align:'center', width:60},
                 {title: '名称', field: 'name', align:'left', width: '20%'},
                 {title: '数据', field: 'value'},

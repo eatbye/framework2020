@@ -45,9 +45,16 @@ public class DictController {
             List<Dict> sonList = dictService.getList(dict.getId());
             String data = "";
             for(Dict sonDict : sonList){
-                data += sonDict.getName()+"("+sonDict.getValue()+")"+", ";
+                String name = sonDict.getName();
+                if(StringUtils.isNotEmpty(sonDict.getColor())){
+                    name = "<span style='color:"+sonDict.getColor()+"'>"+name+"</span>";
+                }
+                data += name + "("+sonDict.getValue()+")"+",";
             }
-            row.put("value", StringUtils.getNotNullString(data));
+            if(data.endsWith(",")){
+                data = data.substring(0, data.length()-1);
+            }
+            row.put("value", data);
             list.add(row);
         }
 
