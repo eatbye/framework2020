@@ -10,8 +10,8 @@
                                 <div class="layui-form-item">
                                     <div class="layui-inline">
 
-                                        <button class="layui-btn layui-btn-sm" id="add" type="button">登记</button>
-                                        <button class="layui-btn layui-btn-sm" id="add" type="button">删除</button>
+                                        <button class="layui-btn layui-btn-sm" id="add" type="button">新增</button>
+                                        <button class="layui-btn layui-btn-sm" id="del" type="button">删除</button>
 
 
                                     </div>
@@ -39,7 +39,7 @@
                 <div class="layui-card-header" id="form-header">新增菜单</div>
                 <div class="layui-card-body febs-table-full">
                     <form class="layui-form layui-table-form" action="" lay-filter="menu-form">
-                        <div class="layui-form-item febs-hide">
+                        <div class="layui-form-item febs-hide" style="display: none">
                             <label class="layui-form-label febs-form-item-require">ID：</label>
                             <div class="layui-input-block">
                                 <input type="text" name="menuId" class="layui-input">
@@ -128,6 +128,7 @@
             $order_parent = $order.parents('.layui-form-item'),
             $header = $view.find('#form-header'),
             add = $("#add"),
+            del = $("#del"),
             _currentMenuData,
             _selectNode,
             _menuTree,
@@ -138,19 +139,38 @@
 
         //新增
         add.on('click', function () {
-            alert(1);
             reset();
             var selected = _menuTree.getChecked(false, true);
             if (selected.length > 1) {
                 admin.alert.warn('只能选择一个节点作为父级！');
                 return;
             }
-            if (selected[0] && selected[0].type === '1') {
+            if (selected[0] && selected[0].type === 2) {
                 admin.alert.warn('不能选择按钮作为父级！');
                 return;
             }
             form.val("menu-form", {
                 "parentId": selected[0] ? selected[0].id : ''
+            });
+        });
+
+        //删除菜单
+        del.on('click', function () {
+            var checked = _menuTree.getChecked(false, true);
+            if (checked.length < 1) {
+                admin.alert.warn('请勾选需要删除的菜单或按钮');
+                return;
+            }
+            var menuIds = [];
+            layui.each(checked, function (key, item) {
+                menuIds.push(item.id)
+            });
+            admin.modal.confirm('提示', '当您点击确定按钮后，这些记录将会被彻底删除，如果其包含子记录，也将一并删除！', function () {
+                admin.get('${basePath}/system/menu/delete?menuId=' + menuIds.join(','), null, function () {
+                    admin.alert.success('删除成功！');
+                    reloadMenuTree();
+                    reset();
+                })
             });
         });
 
@@ -221,7 +241,7 @@
             _currentMenuData = data;
             $type.attr("disabled", true);
             var type = data.type;
-            handleTypeChange(type);
+            // handleTypeChange(type);
             if (type === 1) { // 菜单
                 $header.text('修改菜单');
             } else { // 按钮
@@ -244,7 +264,6 @@
         });
 
         $reset.on('click', function () {
-            // $menuName.val('');
             reloadMenuTree();
             reset();
         });
@@ -279,7 +298,7 @@
 
         function reset() {
             $view.find('#reset-form').trigger('click');
-            handleTypeChange('0');
+            handleTypeChange(1);
             $type.removeAttr("disabled");
         }
 
@@ -321,33 +340,26 @@
                 "url": '',
                 "orderNum": ''
             });
-            if (type === '1') {
-                $header.text('新增按钮');
-                $icon_parent.hide();
-                $url_parent.hide();
-                $order_parent.hide();
-            } else {
+            if (type === 1) {
                 $header.text('新增菜单');
                 $icon_parent.show();
                 $url_parent.show();
                 $order_parent.show();
+            } else {
+                $header.text('新增按钮');
+                $icon_parent.hide();
+                $url_parent.hide();
+                $order_parent.hide();
             }
         };
 
+        //保存按钮
         form.on('submit(menu-form-submit)', function (data) {
-            if (data.field.menuId && $header.text().indexOf('修改') !== -1) {
-                admin.post('${basePath}system/menu/update', data.field, function () {
-                    admin.alert.success('修改成功');
-                    reloadMenuTree();
-                    reset();
-                })
-            } else {
-                admin.post(ctx + 'menu', data.field, function () {
-                    admin.alert.success('新增成功');
-                    reloadMenuTree();
-                    reset();
-                })
-            }
+            admin.post('${basePath}system/menu/update', data.field, function () {
+                admin.alert.success('操作成功');
+                reloadMenuTree();
+                reset();
+            })
             return false;
         });
     });

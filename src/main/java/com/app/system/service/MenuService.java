@@ -49,4 +49,11 @@ public class MenuService extends HibernateDao<Menu> {
         });
         return trees;
     }
+
+    public void deleteMenus(String menuIds) {
+        String[] menuIdArray = menuIds.split(",");
+        for(String menuId : menuIdArray){
+            delete(new Integer(menuId));
+        }
+    }
 }
