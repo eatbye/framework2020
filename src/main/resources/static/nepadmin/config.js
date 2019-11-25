@@ -69,6 +69,7 @@ layui.define(function(exports) {
       }
     },
     //第三方扩展
+
     extend: {
       //后台根据业务需求扩展的方法
       helper: 'lay/extends/helper',
@@ -80,7 +81,8 @@ layui.define(function(exports) {
       echarts: 'lay/extends/echarts',
       echartsTheme: 'lay/extends/echartsTheme',
       //复制内容到剪贴板
-      clipboard: 'lay/extends/clipboard'
+      clipboard: 'lay/extends/clipboard',
+      eleTree: 'lay/extends/eleTree'
     }
   })
 })

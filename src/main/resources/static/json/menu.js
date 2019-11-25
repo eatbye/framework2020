@@ -23,11 +23,11 @@
 		"title":"系统管理",
 		"icon": "layui-icon-experiment",
 		"childs":[{
-			"title": "数据字典管理",
+			"title": "字典管理",
 			"href":"/system/dict/list"
 		},{
-			"title": "表格列表",
-			"href":"/list/table/id=1"
+			"title": "菜单管理",
+			"href":"/system/menu/menu"
 		},{
 			"title": "卡片列表",
 			"href":"/list/card"

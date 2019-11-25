@@ -17,7 +17,7 @@ public class Dict {
     private String color;
     private Integer sort;
     private Integer valid; //1有效；2无效
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parentDictId")
     private Dict parentDict;
 
