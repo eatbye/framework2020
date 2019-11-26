@@ -1,5 +1,7 @@
 package com.app.system.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -18,6 +20,7 @@ public class Department {
     private Integer valid; //1有效；2无效
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parentDepartmentId")
+    @JsonIgnore
     private Department parentDepartment;    //上一级部门
 
     public Integer getId() {

@@ -1,5 +1,7 @@
 package com.app.system.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -21,6 +23,7 @@ public class Menu {
     private Integer valid; //1有效；2无效
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parentMenuId")
+    @JsonIgnore
     private Menu parentMenu; //父级菜单
 
     public Integer getId() {

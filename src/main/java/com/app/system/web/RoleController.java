@@ -24,6 +24,7 @@ import java.util.Vector;
 
 /**
  * 角色管理
+ * @author ccj
  */
 @Controller
 @RequestMapping(Constant.VIEW_PREFIX + "system/role")
@@ -49,6 +50,17 @@ public class RoleController {
         pageData.setCode(0);
         pageData.setCount(roleList.size());
         return pageData;
+    }
+
+    /**
+     * 全部角色信息，用户修改页面使用
+     * @return
+     */
+    @RequestMapping("roleAllList")
+    @ResponseBody
+    public SqdsResponse roleAllList(){
+        List<Role> roleList = roleService.list();
+        return new SqdsResponse().success().data(roleList);
     }
 
     @RequestMapping("form")

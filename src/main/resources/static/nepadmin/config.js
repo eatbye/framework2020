@@ -82,7 +82,9 @@ layui.define(function(exports) {
       echartsTheme: 'lay/extends/echartsTheme',
       //复制内容到剪贴板
       clipboard: 'lay/extends/clipboard',
-      eleTree: 'lay/extends/eleTree'
+      eleTree: 'lay/extends/eleTree',
+      treeSelect: 'lay/extends/treeSelect',
+      formSelects: 'lay/extends/formSelects-v4.min',
     }
   })
 })
