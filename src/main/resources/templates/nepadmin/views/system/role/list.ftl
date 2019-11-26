@@ -7,11 +7,10 @@
 
                     <div class="test-table-reload-btn" style="margin:10px">
                         <form id="queryForm">
-                            角色名称：
-                            <div class="layui-inline">
+                            <div class="layui-inline" style="display: none">
                                 <input class="layui-input" name="name" id="roleName" autocomplete="off" style="height: 30px;">
                             </div>
-                            <button class="layui-btn layui-btn-sm" id="query" type="button">搜索</button>
+                            <button class="layui-btn layui-btn-sm" id="query" type="button" style="display: none">搜索</button>
                             <button class="layui-btn layui-btn-sm" id="add" type="button">登记</button>
                         </form>
                     </div>
@@ -64,7 +63,7 @@
                 // { title: '状态', templet: '#TPL-list-table-status', width: 80 },
                 {title: '角色名称', field: 'roleName', align:'center', width: '20%'},
                 {title: '角色描述', field: 'roleDescription'},
-                {title: '拍序号', field: 'sort',align:'center', width: '10%'},
+                {title: '排序号', field: 'sort',align:'center', width: '10%'},
                 {title: '操作', align: 'center', fixed: 'right',  width: 170, toolbar: '#table-operate-bar'}
             ]]
         });

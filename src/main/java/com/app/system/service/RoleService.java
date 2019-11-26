@@ -1,6 +1,7 @@
 package com.app.system.service;
 
 import com.app.sqds.hibernate.HibernateDao;
+import com.app.sqds.util.StringUtils;
 import com.app.system.model.Menu;
 import com.app.system.model.Role;
 import com.app.system.model.RoleMenu;
@@ -27,6 +28,9 @@ public class RoleService extends HibernateDao<Role> {
         save(role);
         roleMenuService.deleteByRoleId(role.getId());
         for(String menuId : menuIdArray){
+            if(StringUtils.isEmpty(menuId)){
+                continue;
+            }
             Menu menu = menuService.get(new Integer(menuId));
             if(menu!=null){
                 RoleMenu roleMenu = new RoleMenu();
@@ -35,5 +39,10 @@ public class RoleService extends HibernateDao<Role> {
                 roleMenuService.save(roleMenu);
             }
         }
+    }
+
+    public void deleteRole(int roleId) {
+        roleMenuService.deleteByRoleId(roleId);
+        delete(roleId);
     }
 }

@@ -86,7 +86,7 @@ public class RoleController {
     @ResponseBody
     public SqdsResponse delete() {
         int id = ParamUtils.getInt("id",0);
-        roleService.delete(id);
+        roleService.deleteRole(id);
         return new SqdsResponse().success();
     }
 
