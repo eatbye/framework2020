@@ -139,6 +139,7 @@
             });
         });
 
+        //修改部门
         eleTree.on("nodeClick(deptTree)", function (d) {
             $header.text('修改部门');
             var data = d.data.currentData.data;
@@ -152,41 +153,6 @@
             });
         });
 
-        dropdown.render({
-            elem: $view.find('.action-more'),
-            click: function (name, elem, event) {
-                if (name === 'add') {
-                    reset();
-                    var selected = _deptTree.getChecked(false, true);
-                    if (selected.length > 1) {
-                        admin.alert.warn('只能选择一个节点作为父级！');
-                        return;
-                    }
-                    form.val("dept-form", {
-                        "parentId": selected[0] ? selected[0].id : ''
-                    });
-                }
-                if (name === 'delete') {
-
-                }
-                if (name === 'export') {
-                    admin.download(ctx + 'dept/excel', getQueryParams(), '部门信息表.xlsx');
-                }
-            },
-            options: [{
-                name: 'add',
-                title: '新增部门',
-                perms: 'dept:add'
-            }, {
-                name: 'delete',
-                title: '删除部门',
-                perms: 'dept:delete'
-            }, {
-                name: 'export',
-                title: '导出Excel',
-                perms: 'dept:export'
-            }]
-        });
 
         $view.on('click', '#submit', function () {
             $view.find('#submit-form').trigger('click');
