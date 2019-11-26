@@ -25,12 +25,12 @@ public class DepartmentService extends HibernateDao<Department> {
         }
     }
 
-    public MenuTree<Department> findDepartment() {
+    public List<DepartmentTree<Department>> findDepartment() {
         String hql = "from Department order by sort,id";
         List<Department> departmentList = list(hql);
         List<DepartmentTree<Department>> trees = this.convertDepartments(departmentList);
 
-        return (MenuTree<Department>) TreeUtil.buildDepartTree(trees);
+        return TreeUtil.buildDepartTree(trees);
     }
 
     private List<DepartmentTree<Department>> convertDepartments(List<Department> departments){

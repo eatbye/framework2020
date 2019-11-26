@@ -67,4 +67,13 @@ public class Department {
     public void setParentDepartment(Department parentDepartment) {
         this.parentDepartment = parentDepartment;
     }
+
+    @Transient
+    public Integer getParentId(){
+        if(parentDepartment!=null){
+            return parentDepartment.getId();
+        }else{
+            return null;
+        }
+    }
 }

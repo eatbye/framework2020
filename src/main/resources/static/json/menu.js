@@ -29,8 +29,8 @@
 			"title": "菜单管理",
 			"href":"/system/menu/menu"
 		},{
-			"title": "卡片列表",
-			"href":"/list/card"
+			"title": "部门管理",
+			"href":"/system/department/index"
 		}]
 	},{
 		"title":"详情页",
