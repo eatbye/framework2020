@@ -13,8 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
+/**
+ * 菜单管理
+ */
 @Controller
 @RequestMapping(Constant.VIEW_PREFIX + "system/menu")
 public class MenuController {
@@ -35,12 +36,9 @@ public class MenuController {
 
     @RequestMapping("update")
     @ResponseBody
-    public SqdsResponse updateMenu() {
-        logger.debug("update...");
-//        this.menuService.updateMenu(menu);
+    public SqdsResponse update() {
         int menuId = ParamUtils.getInt("menuId",0);
         int parentId = ParamUtils.getInt("parentId",0);
-        logger.debug("parentId = {}",parentId);
         Menu menu = menuService.get(menuId);
         if(menu == null){
             menu = new Menu();
@@ -49,13 +47,12 @@ public class MenuController {
         Menu parentMenu = menuService.get(parentId);
         menu.setParentMenu(parentMenu);
         menuService.save(menu);
-        logger.debug("menu = {}",menu);
         return new SqdsResponse().success();
     }
 
     @RequestMapping("delete")
     @ResponseBody
-    public SqdsResponse deleteMenus() {
+    public SqdsResponse delete() {
         String menuId = ParamUtils.getString("menuId","");
         menuService.deleteMenus(menuId);
         return new SqdsResponse().success();

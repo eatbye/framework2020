@@ -40,4 +40,31 @@ public class TreeUtil {
         root.setState(state);
         return root;
     }
+
+    public static <T> List<DepartmentTree<T>> buildDepartTree(List<DepartmentTree<T>> nodes) {
+        if (nodes == null) {
+            return null;
+        }
+        List<DepartmentTree<T>> result = new ArrayList<>();
+        nodes.forEach(children -> {
+            String pid = children.getParentId();
+            if (pid == null || "0".equals(pid)) {
+                result.add(children);
+                return;
+            }
+            for (DepartmentTree<T> n : nodes) {
+                String id = n.getId();
+                if (id != null && id.equals(pid)) {
+                    if (n.getChildren() == null)
+                        n.initChildren();
+                    n.getChildren().add(children);
+                    children.setHasParent(true);
+                    n.setHasChild(true);
+                    return;
+                }
+            }
+        });
+
+        return result;
+    }
 }

@@ -176,63 +176,6 @@
 
 
 
-        dropdown.render({
-            elem: $view.find('.action-more'),
-            click: function (name, elem, event) {
-                if (name === 'add') {
-                    reset();
-                    var selected = _menuTree.getChecked(false, true);
-                    if (selected.length > 1) {
-                        admin.alert.warn('只能选择一个节点作为父级！');
-                        return;
-                    }
-                    if (selected[0] && selected[0].type === '1') {
-                        admin.alert.warn('不能选择按钮作为父级！');
-                        return;
-                    }
-                    form.val("menu-form", {
-                        "parentId": selected[0] ? selected[0].id : ''
-                    });
-                }
-                if (name === 'delete') {
-                    var checked = _menuTree.getChecked(false, true);
-                    if (checked.length < 1) {
-                        admin.alert.warn('请勾选需要删除的菜单或按钮');
-                        return;
-                    }
-                    var menuIds = [];
-                    layui.each(checked, function (key, item) {
-                        menuIds.push(item.id)
-                    });
-                    admin.modal.confirm('提示', '当您点击确定按钮后，这些记录将会被彻底删除，如果其包含子记录，也将一并删除！', function () {
-                        admin.get(ctx + 'menu/delete/' + menuIds.join(','), null, function () {
-                            admin.alert.success('删除成功！');
-                            reloadMenuTree();
-                            reset();
-                        })
-                    });
-                }
-                if (name === 'export') {
-                    admin.download(ctx + 'menu/excel', {
-                        "menuName": $menuName.val().trim()
-                    }, '菜单信息表.xlsx');
-                }
-            },
-            options: [{
-                name: 'add',
-                title: '新增',
-                perms: 'menu:add'
-            }, {
-                name: 'delete',
-                title: '删除',
-                perms: 'menu:delete'
-            }, {
-                name: 'export',
-                title: '导出Excel',
-                perms: 'menu:export'
-            }]
-        });
-
         _menuTree = renderMenuTree();
 
         //点击树形菜单进行修改
