@@ -3,8 +3,11 @@ package com.app.system.web;
 import com.app.app.model.Family;
 import com.app.sqds.util.*;
 import com.app.system.model.Dict;
+import com.app.system.model.Menu;
 import com.app.system.model.Role;
+import com.app.system.model.RoleMenu;
 import com.app.system.service.DictService;
+import com.app.system.service.RoleMenuService;
 import com.app.system.service.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +32,8 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private RoleMenuService roleMenuService;
 
     @RequestMapping("list")
     public void list(){
@@ -60,12 +65,14 @@ public class RoleController {
     @ResponseBody
     public SqdsResponse save() {
         int id = ParamUtils.getInt("id",0);
+        String menuIds = ParamUtils.getString("menuIds","");
+        String[] menuIdArray = menuIds.split(",");
         Role role = roleService.get(id);
         if(role == null){
             role = new Role();
         }
         Servlets.bind(role);
-        roleService.save(role);
+        roleService.saveRole(role,menuIdArray);
 
         return new SqdsResponse().success();
     }
@@ -81,5 +88,18 @@ public class RoleController {
         int id = ParamUtils.getInt("id",0);
         roleService.delete(id);
         return new SqdsResponse().success();
+    }
+
+    @RequestMapping("menu")
+    @ResponseBody
+    public SqdsResponse menu(){
+        int roleId = ParamUtils.getInt("roleId",0);
+        List<RoleMenu> roleMenuList = roleMenuService.roleMenuList(roleId);
+        String data = "";
+        for(RoleMenu roleMenu : roleMenuList){
+            logger.debug("roleMenu  = {}", roleMenu);
+            data = data + roleMenu.getMenu().getId()+",";
+        }
+        return new SqdsResponse().success().data(data);
     }
 }

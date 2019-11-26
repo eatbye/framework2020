@@ -188,6 +188,7 @@
                 showCheckbox: true,
                 checkStrictly: true,
                 renderAfterExpand: false,
+                defaultExpandAll: true,
                 where: {
                     // "deptName": $deptName.val().trim(),
                     "invalidate_ie_cache": new Date().getTime()

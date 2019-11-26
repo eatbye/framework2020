@@ -257,6 +257,7 @@
                 showCheckbox: true,
                 checkStrictly: true,
                 renderAfterExpand: true,
+                defaultExpandAll: true,
                 request: {
                     name: "title",
                     key: "id",
