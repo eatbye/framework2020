@@ -31,6 +31,12 @@
 		},{
 			"title": "部门管理",
 			"href":"/system/department/index"
+		},{
+			"title": "角色管理",
+			"href":"/system/role/list"
+		},{
+			"title": "用户管理",
+			"href":"/system/user/list"
 		}]
 	},{
 		"title":"详情页",
