@@ -58,4 +58,9 @@ public class UserService extends HibernateDao<User> {
         userRoleService.deleteByUserId(userId);
         delete(userId);
     }
+
+    public User findByName(String userName) {
+        String hql = "from User u where u.username=?";
+        return getSingleResult(hql,userName);
+    }
 }

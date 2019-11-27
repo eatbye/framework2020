@@ -52,7 +52,7 @@
                 </li>
                 <li class="layui-nav-item" lay-unselect>
                     <a class="layui-hide-xs">
-                        欢迎回来，{{ layui.admin.data()['user'].username  }}
+                        欢迎使用，${user.realName}
                         <i class="layui-icon layui-icon-triangle-d"></i>
                     </a>
                     <a class="layui-hide-sm layui-show-xs-inline-block">
@@ -62,7 +62,7 @@
                         <dd><a>个人信息</a></dd>
                         <dd><a>认证信息</a></dd>
                         <hr/>
-                        <dd><a href="javascript:void(0);" nepadmin-event="logout">退出登录</a></dd>
+                        <dd><a href="/logout" nepadmin-event="logout">退出登录</a></dd>
                     </dl>
                 </li>
             </ul>

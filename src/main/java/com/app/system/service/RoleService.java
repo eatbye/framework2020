@@ -45,4 +45,14 @@ public class RoleService extends HibernateDao<Role> {
         roleMenuService.deleteByRoleId(roleId);
         delete(roleId);
     }
+
+    /**
+     * 取得指定用户的所有角色
+     * @param userId
+     * @return
+     */
+    public List<Role> findUserRole(int userId){
+        String hql = "select r from UserRole ur, Role r where ur.role.id=r.id where ur.user.id=?  ";
+        return getSession().createQuery(hql).setInteger(0,userId).list();
+    }
 }

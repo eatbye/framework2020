@@ -43,6 +43,7 @@ public class UserController {
     @RequestMapping("listData")
     @ResponseBody
     public PageData listData(PageInfo<User> pageInfo){
+        logger.debug("000000000000");
         pageInfo = userService.list(pageInfo);
         return pageInfo.toPageData();
     }
