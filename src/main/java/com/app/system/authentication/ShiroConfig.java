@@ -1,8 +1,9 @@
 package com.app.system.authentication;
 
 import com.app.sqds.util.StringUtils;
-import com.app.system.properties.ShiroProperties;
+import com.app.system.config.ShiroProperties;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.slf4j.Logger;
@@ -69,5 +70,12 @@ public class ShiroConfig {
         // 配置 rememberMeCookie
 //        securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
     }
 }

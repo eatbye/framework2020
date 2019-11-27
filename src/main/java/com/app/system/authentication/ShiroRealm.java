@@ -1,7 +1,10 @@
 package com.app.system.authentication;
 
+import com.app.sqds.util.StringUtils;
+import com.app.system.model.Menu;
 import com.app.system.model.Role;
 import com.app.system.model.User;
+import com.app.system.service.MenuService;
 import com.app.system.service.RoleService;
 import com.app.system.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -10,11 +13,15 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 import java.util.stream.Collectors;
 
 /**
@@ -24,9 +31,11 @@ import java.util.stream.Collectors;
  */
 @Component
 public class ShiroRealm extends AuthorizingRealm {
+    private Logger logger = LoggerFactory.getLogger(ShiroRealm.class);
+
     @Autowired private RoleService roleService;
     @Autowired private UserService userService;
-
+    @Autowired private MenuService menuService;
     /**
      * 授权模块，获取用户角色和权限
      *
@@ -36,21 +45,31 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
-        String username = user.getUsername();
+//        String username = user.getUsername();
         Integer userId = user.getId();
+
+        logger.debug("---------##-----------------");
+        logger.debug("userId = {}", userId);
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 
         // 获取用户角色集
         List<Role> roleList = roleService.findUserRole(userId);
-        //TODO
+
         Set<String> roleSet = roleList.stream().map(Role::getRoleName).collect(Collectors.toSet());
         simpleAuthorizationInfo.setRoles(roleSet);
 
         // 获取用户权限集
-//        List<Menu> permissionList = this.menuService.findUserPermissions(userName);
-//        Set<String> permissionSet = permissionList.stream().map(Menu::getPerms).collect(Collectors.toSet());
-//        simpleAuthorizationInfo.setStringPermissions(permissionSet);
+        List<Menu> permissionList = this.menuService.findUserPermissions(userId);
+
+        List<String> list = new Vector<>();
+        for(Menu menu : permissionList){
+            if(StringUtils.isNotEmpty(menu.getPermission())){
+                list.add(menu.getPermission());
+            }
+        }
+        Set<String> permissionSet = new HashSet<>(list);
+        simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
 

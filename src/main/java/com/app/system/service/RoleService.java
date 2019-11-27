@@ -52,7 +52,7 @@ public class RoleService extends HibernateDao<Role> {
      * @return
      */
     public List<Role> findUserRole(int userId){
-        String hql = "select r from UserRole ur, Role r where ur.role.id=r.id where ur.user.id=?  ";
+        String hql = "select r from UserRole ur, Role r where ur.role.id=r.id and ur.user.id=?  ";
         return getSession().createQuery(hql).setInteger(0,userId).list();
     }
 }

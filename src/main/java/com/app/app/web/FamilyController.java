@@ -3,6 +3,7 @@ package com.app.app.web;
 import com.app.app.model.Family;
 import com.app.app.service.FamilyService;
 import com.app.sqds.util.*;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,14 @@ public class FamilyController {
     @Autowired private FamilyService familyService;
 
     @RequestMapping("list")
+    @RequiresPermissions("family:list")
     public void list(){
         logger.debug("--------------");
     }
 
     @RequestMapping("listData")
     @ResponseBody
+    @RequiresPermissions("family:list")
     public PageData listData(PageInfo<Family> pageInfo){
         pageInfo = familyService.familyList(pageInfo);
         return pageInfo.toPageData();

@@ -100,4 +100,9 @@ public class CommonController {
 
         logger.debug("layout");
     }
+
+    @GetMapping("unauthorized")
+    public String unauthorized() {
+        return "error/403";
+    }
 }

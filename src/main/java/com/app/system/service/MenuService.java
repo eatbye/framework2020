@@ -56,4 +56,9 @@ public class MenuService extends HibernateDao<Menu> {
             delete(new Integer(menuId));
         }
     }
+
+    public List<Menu> findUserPermissions(Integer userId) {
+        String hql = "select m from UserRole ur, User u, Role r, Menu m, RoleMenu rm where ur.user.id=u.id and ur.role.id=r.id and r.id=rm.role.id and rm.menu.id=m.id and u.id=?";
+        return list(hql,userId);
+    }
 }
