@@ -4,13 +4,16 @@ import com.app.sqds.util.ParamUtils;
 import com.app.sqds.util.SqdsResponse;
 import com.app.sqds.util.StringUtils;
 import com.app.system.model.User;
+import com.app.system.service.MenuService;
 import com.app.system.util.CaptchaUtil;
+import com.app.system.util.MenuTree;
 import com.wf.captcha.base.Captcha;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 用户登录
@@ -27,6 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping
 public class CommonController {
     private Logger logger = LoggerFactory.getLogger(CommonController.class);
+
+    @Autowired private MenuService menuService;
 
     /**
      * 用户登录
@@ -104,5 +110,16 @@ public class CommonController {
     @GetMapping("unauthorized")
     public String unauthorized() {
         return "error/403";
+    }
+
+    /**
+     * 左侧菜单
+     * @return
+     */
+    @RequestMapping("login/menu")
+    @ResponseBody
+    public SqdsResponse menu(){
+        List<MenuTree> menuTreeList =  menuService.getMenuTree();
+        return new SqdsResponse().success().data(menuTreeList);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * 菜单管理
@@ -20,6 +21,34 @@ import java.util.List;
 @Service
 public class MenuService extends HibernateDao<Menu> {
     private Logger logger = LoggerFactory.getLogger(MenuService.class);
+
+    public List<MenuTree> getMenuTree(){
+        String hql = "from Menu m where m.parentMenu is null order by m.sort, m.id";
+        List<Menu> rootMenuList = list(hql);
+        logger.debug("rootMenuList.size = {}", rootMenuList.size());
+        List<MenuTree> menuTreeList = new Vector<>();
+        for(Menu rootMenu : rootMenuList){
+            MenuTree menuTree = new MenuTree();
+            menuTree.setIcon(rootMenu.getIcon());
+            menuTree.setTitle(rootMenu.getMenuName());
+
+            String hql1 = "from Menu m where m.parentMenu.id=? order by m.sort, m.id";
+            List<Menu> childMenuList = list(hql1, rootMenu.getId());
+            List<MenuTree> childMenuTreeList = new Vector<>();
+            for(Menu childMenu : childMenuList){
+                MenuTree childMenuTree = new MenuTree();
+                childMenuTree.setHref(childMenu.getUrl());
+                childMenuTree.setTitle(childMenu.getMenuName());
+                childMenuTreeList.add(childMenuTree);
+            }
+
+            menuTree.setChilds(childMenuTreeList);
+
+            menuTreeList.add(menuTree);
+        }
+
+        return menuTreeList;
+    }
 
     public MenuTree<Menu> findMenus() {
         String hql = "from Menu order by sort,id";

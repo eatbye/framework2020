@@ -93,7 +93,7 @@
     <!-- 侧边菜单 -->
     <div class="layui-side" id="app-sidebar">
         <div class="layui-side-scroll">
-            <div class="layui-logo"><span>Ne<b>pA</b>dmin</span></div>
+            <div class="layui-logo">管理系统</div>
             <script
                     type="text/html"
                     template

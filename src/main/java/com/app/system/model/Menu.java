@@ -3,6 +3,7 @@ package com.app.system.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * 菜单

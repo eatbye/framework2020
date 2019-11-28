@@ -2,7 +2,7 @@
 layui.define([],function(exports){
     exports('api',{
         login:'json/login.js',
-        getMenu:'json/menu.js',
+        getMenu:'login/menu',
         getGoods:'json/goods.js'
     });
 })
