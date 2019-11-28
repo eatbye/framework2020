@@ -60,7 +60,7 @@ public class DepartmentController {
         Servlets.bind(department);
         Department parentDepartment = departmentService.get(parentId);
         department.setParentDepartment(parentDepartment);
-        departmentService.save(department);
+        departmentService.saveDepartment(department);
 
         return new SqdsResponse().success();
     }

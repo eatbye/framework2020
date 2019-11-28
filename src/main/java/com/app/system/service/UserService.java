@@ -6,6 +6,7 @@ import com.app.sqds.util.StringUtils;
 import com.app.system.model.User;
 import com.app.system.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class UserService extends HibernateDao<User> {
         return list(pageInfo, hql, dataList.toArray());
     }
 
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
     public void saveUser(User user, List<UserRole> userRoleList) {
         save(user);
         userRoleService.deleteByUserId(user.getId());
@@ -54,6 +56,7 @@ public class UserService extends HibernateDao<User> {
      * 删除用户
      * @param userId
      */
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
     public void deleteUser(int userId) {
         userRoleService.deleteByUserId(userId);
         delete(userId);

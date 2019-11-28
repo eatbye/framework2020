@@ -45,7 +45,6 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
-//        String username = user.getUsername();
         Integer userId = user.getId();
 
         logger.debug("---------##-----------------");
@@ -56,19 +55,22 @@ public class ShiroRealm extends AuthorizingRealm {
         // 获取用户角色集
         List<Role> roleList = roleService.findUserRole(userId);
 
-        Set<String> roleSet = roleList.stream().map(Role::getRoleName).collect(Collectors.toSet());
+        Set<String> roleSet = new HashSet<>();
+        for(Role role : roleList){
+            roleSet.add(role.getRoleName());
+        }
+
         simpleAuthorizationInfo.setRoles(roleSet);
 
         // 获取用户权限集
         List<Menu> permissionList = this.menuService.findUserPermissions(userId);
 
-        List<String> list = new Vector<>();
+        Set<String> permissionSet = new HashSet<>();
         for(Menu menu : permissionList){
             if(StringUtils.isNotEmpty(menu.getPermission())){
-                list.add(menu.getPermission());
+                permissionSet.add(menu.getPermission());
             }
         }
-        Set<String> permissionSet = new HashSet<>(list);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }

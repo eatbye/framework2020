@@ -59,14 +59,11 @@ public class ShiroConfig {
 
     @Bean
     public SecurityManager securityManager(ShiroRealm shiroRealm) {
-        logger.debug("0000000000000000000");
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 配置 SecurityManager，并注入 shiroRealm
         securityManager.setRealm(shiroRealm);
         // 配置 shiro session管理器
 //        securityManager.setSessionManager(sessionManager());
-        // 配置 缓存管理类 cacheManager
-//        securityManager.setCacheManager(cacheManager());
         // 配置 rememberMeCookie
 //        securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;

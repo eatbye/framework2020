@@ -6,6 +6,8 @@ import com.app.system.model.Menu;
 import com.app.system.model.Role;
 import com.app.system.model.RoleMenu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class RoleService extends HibernateDao<Role> {
         return list(hql);
     }
 
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
     public void saveRole(Role role, String[] menuIdArray) {
         save(role);
         roleMenuService.deleteByRoleId(role.getId());
@@ -41,6 +44,7 @@ public class RoleService extends HibernateDao<Role> {
         }
     }
 
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
     public void deleteRole(int roleId) {
         roleMenuService.deleteByRoleId(roleId);
         delete(roleId);
@@ -51,6 +55,7 @@ public class RoleService extends HibernateDao<Role> {
      * @param userId
      * @return
      */
+    @Cacheable(value = "role")
     public List<Role> findUserRole(int userId){
         String hql = "select r from UserRole ur, Role r where ur.role.id=r.id and ur.user.id=?  ";
         return getSession().createQuery(hql).setInteger(0,userId).list();

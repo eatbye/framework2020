@@ -6,6 +6,8 @@ import com.app.system.util.MenuTree;
 import com.app.system.util.TreeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,6 +52,7 @@ public class MenuService extends HibernateDao<Menu> {
         return trees;
     }
 
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
     public void deleteMenus(String menuIds) {
         String[] menuIdArray = menuIds.split(",");
         for(String menuId : menuIdArray){
@@ -57,8 +60,14 @@ public class MenuService extends HibernateDao<Menu> {
         }
     }
 
+    @Cacheable(value = "menu")
     public List<Menu> findUserPermissions(Integer userId) {
         String hql = "select m from UserRole ur, User u, Role r, Menu m, RoleMenu rm where ur.user.id=u.id and ur.role.id=r.id and r.id=rm.role.id and rm.menu.id=m.id and u.id=?";
         return list(hql,userId);
+    }
+
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
+    public void saveMenu(Menu menu) {
+        save(menu);
     }
 }

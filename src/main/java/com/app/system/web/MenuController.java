@@ -46,7 +46,7 @@ public class MenuController {
         Servlets.bind(menu);
         Menu parentMenu = menuService.get(parentId);
         menu.setParentMenu(parentMenu);
-        menuService.save(menu);
+        menuService.saveMenu(menu);
         return new SqdsResponse().success();
     }
 

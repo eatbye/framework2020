@@ -6,6 +6,7 @@ import com.app.system.model.Menu;
 import com.app.system.util.DepartmentTree;
 import com.app.system.util.MenuTree;
 import com.app.system.util.TreeUtil;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.List;
 @Service
 public class DepartmentService extends HibernateDao<Department> {
 
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
     public void deleteDepartment(String departmentIds) {
         String[] departmentIdArray = departmentIds.split(",");
         for(String departmentId : departmentIdArray){
@@ -46,5 +48,10 @@ public class DepartmentService extends HibernateDao<Department> {
             trees.add(tree);
         });
         return trees;
+    }
+
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
+    public void saveDepartment(Department department) {
+        save(department);
     }
 }

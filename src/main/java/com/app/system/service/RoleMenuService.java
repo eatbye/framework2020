@@ -2,6 +2,7 @@ package com.app.system.service;
 
 import com.app.sqds.hibernate.HibernateDao;
 import com.app.system.model.RoleMenu;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class RoleMenuService extends HibernateDao<RoleMenu> {
         return list(hql,roleId);
     }
 
+    @CacheEvict(value = {"role","menu"}, allEntries = true)
     public void deleteByRoleId(Integer roleId) {
         String hql = "delete from RoleMenu where role.id=?";
         getSession().createQuery(hql).setInteger(0, roleId).executeUpdate();
