@@ -4,11 +4,15 @@ import com.app.sqds.util.StringUtils;
 import com.app.system.config.ShiroProperties;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.SessionListener;
+import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.util.Base64Utils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 /**
@@ -69,7 +75,7 @@ public class ShiroConfig {
         // 配置 SecurityManager，并注入 shiroRealm
         securityManager.setRealm(shiroRealm);
         // 配置 shiro session管理器
-//        securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(sessionManager());
         // 配置 rememberMeCookie
         securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;
@@ -109,5 +115,29 @@ public class ShiroConfig {
         // 设置 cookie 的过期时间，单位为秒，这里为一天
         cookie.setMaxAge(shiroProperties.getCookieTimeout());
         return cookie;
+    }
+
+    @Bean
+    public SessionDAO sessionDAO() {
+        MemorySessionDAO sessionDAO = new MemorySessionDAO();
+        return sessionDAO;
+    }
+
+    /**
+     * session 管理对象
+     *
+     * @return DefaultWebSessionManager
+     */
+    @Bean
+    public DefaultWebSessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        Collection<SessionListener> listeners = new ArrayList<>();
+        listeners.add(new ShiroSessionListener());
+        // 设置 session超时时间
+        sessionManager.setGlobalSessionTimeout(shiroProperties.getSessionTimeout() * 1000L);
+        sessionManager.setSessionListeners(listeners);
+        sessionManager.setSessionDAO(sessionDAO());
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
+        return sessionManager;
     }
 }
