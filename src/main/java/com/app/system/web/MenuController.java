@@ -7,6 +7,7 @@ import com.app.sqds.util.SqdsResponse;
 import com.app.system.model.Menu;
 import com.app.system.service.MenuService;
 import com.app.system.util.MenuTree;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,9 @@ public class MenuController {
         String menuId = ParamUtils.getString("menuId","");
         menuService.deleteMenus(menuId);
         return new SqdsResponse().success();
+    }
+
+    @RequestMapping("menuIcon")
+    public void menuIcon() {
     }
 }

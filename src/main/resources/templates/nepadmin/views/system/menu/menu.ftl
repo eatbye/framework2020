@@ -221,7 +221,7 @@
         });
 
         $icon.focus(function () {
-            admin.modal.open('图标选择', 'others/febs/icon', {
+            admin.modal.open('图标选择', 'system/menu/menuIcon', {
                 btn: ['确定'],
                 yes: function () {
                     var icon = $('#febs-icon').find('.icon-active .icon-name').text();
