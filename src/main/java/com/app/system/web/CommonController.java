@@ -119,7 +119,8 @@ public class CommonController {
     @RequestMapping("login/menu")
     @ResponseBody
     public SqdsResponse menu(){
-        List<MenuTree> menuTreeList =  menuService.getMenuTree();
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        List<MenuTree> menuTreeList =  menuService.getMenuTree(user.getId());
         return new SqdsResponse().success().data(menuTreeList);
     }
 }

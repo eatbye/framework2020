@@ -22,29 +22,35 @@ import java.util.Vector;
 public class MenuService extends HibernateDao<Menu> {
     private Logger logger = LoggerFactory.getLogger(MenuService.class);
 
-    public List<MenuTree> getMenuTree(){
-        String hql = "from Menu m where m.parentMenu is null order by m.sort, m.id";
-        List<Menu> rootMenuList = list(hql);
-        logger.debug("rootMenuList.size = {}", rootMenuList.size());
+    public List<MenuTree> getMenuTree(Integer userId){
+
+        String hql = "select distinct m from User u, UserRole ur, Role r, RoleMenu rm, Menu m where u.id=ur.user.id and ur.role.id = r.id and r.id=rm.role.id" +
+                " and rm.menu.id=m.id and m.type=1 and u.id=? order by m.sort";
+
+        List<Menu> menuList = list(hql, userId);
+
         List<MenuTree> menuTreeList = new Vector<>();
-        for(Menu rootMenu : rootMenuList){
-            MenuTree menuTree = new MenuTree();
-            menuTree.setIcon(rootMenu.getIcon());
-            menuTree.setTitle(rootMenu.getMenuName());
 
-            String hql1 = "from Menu m where m.parentMenu.id=? order by m.sort, m.id";
-            List<Menu> childMenuList = list(hql1, rootMenu.getId());
-            List<MenuTree> childMenuTreeList = new Vector<>();
-            for(Menu childMenu : childMenuList){
-                MenuTree childMenuTree = new MenuTree();
-                childMenuTree.setHref(childMenu.getUrl());
-                childMenuTree.setTitle(childMenu.getMenuName());
-                childMenuTreeList.add(childMenuTree);
+        for(Menu menu : menuList){
+            if(menu.getParentMenu() == null){
+                MenuTree menuTree = new MenuTree();
+                menuTree.setId(menu.getId()+"");
+                menuTree.setIcon(menu.getIcon());
+                menuTree.setTitle(menu.getMenuName());
+                menuTreeList.add(menuTree);
             }
-
-            menuTree.setChilds(childMenuTreeList);
-
-            menuTreeList.add(menuTree);
+        }
+        for(MenuTree menuTree : menuTreeList){
+            List<MenuTree> childMenuTreeList = new Vector<>();
+            for(Menu menu : menuList){
+                if(menu.getParentMenu() != null && (menu.getParentMenu().getId()+"").equals(menuTree.getId())){
+                    MenuTree childMenuTree = new MenuTree();
+                    childMenuTree.setHref(menu.getUrl());
+                    childMenuTree.setTitle(menu.getMenuName());
+                    childMenuTreeList.add(childMenuTree);
+                    menuTree.setChilds(childMenuTreeList);
+                }
+            }
         }
 
         return menuTreeList;
