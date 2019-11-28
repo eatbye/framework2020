@@ -37,6 +37,7 @@ public class FamilyController {
     }
 
     @RequestMapping("form")
+    @RequiresPermissions("family:edit")
     public void form(ModelMap modelMap){
         int id = ParamUtils.getInt("id",0);
         Family family = familyService.get(id);
@@ -48,6 +49,7 @@ public class FamilyController {
 
     @RequestMapping("save")
     @ResponseBody
+    @RequiresPermissions("family:edit")
     public SqdsResponse save() {
         int id = ParamUtils.getInt("id",0);
         Family family = familyService.get(id);
@@ -67,6 +69,7 @@ public class FamilyController {
 
     @RequestMapping("delete")
     @ResponseBody
+    @RequiresPermissions("family:del")
     public SqdsResponse delete() {
         int id = ParamUtils.getInt("id",0);
         familyService.delete(id);

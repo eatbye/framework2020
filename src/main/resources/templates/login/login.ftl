@@ -121,6 +121,11 @@
             $registDiv.hide();
         });
 
+        $(document).on('keydown', function (e) {
+            if (e.keyCode === 13) {
+                $view.find('#login').trigger("click");
+            }
+        });
 
     });
 </script>

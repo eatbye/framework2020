@@ -16,7 +16,9 @@
                             <input class="layui-input" name="address" id="address" autocomplete="off" style="height: 30px;">
                         </div>
                         <button class="layui-btn layui-btn-sm" id="query" type="button">搜索</button>
-                        <button class="layui-btn layui-btn-sm" id="add" type="button">登记</button>
+                            <@shiro.hasPermission name="family:edit">
+                            <button class="layui-btn layui-btn-sm" id="add" type="button">登记</button>
+                            </@shiro.hasPermission>
                         </form>
                     </div>
                     <table class="layui-table" id="list-table" lay-filter="list-table"></table>
@@ -42,9 +44,13 @@
 </div>
 
 <script type="text/html" id="table-operate-bar">
-    <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="edit">修改</a>
     <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="view">查看</a>
+    <@shiro.hasPermission name="family:edit">
+    <a class="layui-btn layui-btn-normal layui-btn-xs"  data-type="test8" lay-event="edit">修改</a>
+    </@shiro.hasPermission>
+    <@shiro.hasPermission name="family:del">
     <a class="layui-btn layui-btn-danger layui-btn-xs"  data-type="test8" lay-event="del">删除</a>
+    </@shiro.hasPermission>
 </script>
 
 <script>
