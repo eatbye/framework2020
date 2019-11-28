@@ -52,6 +52,8 @@ public class CommonController {
         String username = ParamUtils.getString("username","");
         String password = ParamUtils.getString("password","");
         String verifyCode = ParamUtils.getString("verifyCode","");
+        int rememberMe = ParamUtils.getInt("rememberMe",0);
+        logger.debug("rememberMe = {}", rememberMe);
 
         String code = (String)ParamUtils.getRequest().getSession().getAttribute("code");
         if(StringUtils.isEmpty(code)){
@@ -64,7 +66,12 @@ public class CommonController {
 
         logger.debug("username = {}, password = {}", username, password);
 
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        boolean rememberMeBool = false;
+        if(rememberMe==1){
+            rememberMeBool = true;
+        }
+
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMeBool);
         // 获取Subject对象
         Subject subject = SecurityUtils.getSubject();
 

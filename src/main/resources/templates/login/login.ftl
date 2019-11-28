@@ -51,9 +51,9 @@
                                         </div>
                                     </div>
                                 </div>
-<#--                                <div class="layui-form-item" style="margin-top: -10px;">-->
-<#--                                    <input type="checkbox" name="rememberMe" title="记住我" lay-skin="primary">-->
-<#--                                </div>-->
+                                <div class="layui-form-item" style="margin-top: -10px;">
+                                    <input type="checkbox" name="rememberMe" value="1" title="记住我" lay-skin="primary">
+                                </div>
                                 <div class="layui-form-item">
                                     <button class="layui-btn layui-btn-normal layui-btn-fluid" lay-submit
                                             lay-filter="login-submit" id="login">
