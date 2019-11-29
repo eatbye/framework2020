@@ -77,7 +77,7 @@
                 {field: 'host', title: 'IP地址', minWidth: 165},
                 {field: 'location', title: '登录地点', minWidth: 180},
                 {title: '状态', templet: '#online-status'},
-                {title: '操作', toolbar: '#online-option'}
+                {title: '操作', toolbar: '#online-option', minWidth: 80}
             ]]
         });
 

@@ -38,7 +38,11 @@
 <script type="text/html" id="table-operate-bar">
     <a lay-event="del"><i class="layui-icon febs-edit-area febs-red">&#xe7f9;</i></a>
 </script>
-
+<script type="text/html" id="log-time">
+    <div>
+        <span class="layui-badge">{{d.time}} ms</span>
+    </div>
+</script>
 <script>
     layui.use(['admin', 'table', 'form', 'dropdown', 'jquery'], function (admin, table, form, dropdown, $) {
         var $ = layui.jquery,
@@ -57,11 +61,13 @@
             cols: [[
                 // {title:'', type:'checkbox', width:'6%'},
                 {type:'numbers', title:'序号', align:'center', width:'6%'},
-                {field: 'username', title: '用户'},
-                {field: 'ip', title: 'IP地址'},
-                {field: 'createTime', title: '登录时间', minWidth: 180, sort: true},
+                {field: 'username', title: '用户', width:'6%'},
+                {field: 'ip', title: 'IP地址', width:'10%'},
+                {field: 'createTime', title: '操作时间', minWidth: 180, sort: true},
+                {field: 'operation', title: '操作内容', width:'10%'},
                 {field: 'method', title: '操作方法'},
                 {field: 'params', title: '操作参数'},
+                {field: 'time', title: '耗时', width:'6%', templet: "#log-time"},
                 {title: '操作', toolbar: '#table-operate-bar', width:'6%'}
             ]]
         });
