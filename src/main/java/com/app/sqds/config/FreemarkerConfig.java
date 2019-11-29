@@ -1,6 +1,5 @@
 package com.app.sqds.config;
 
-import com.app.sqds.freemarker.DictValueEx;
 import com.app.system.authentication.freemarker.ShiroTags;
 import com.app.system.tag.DictTag;
 import org.slf4j.Logger;
@@ -24,7 +23,6 @@ public class FreemarkerConfig {
     @PostConstruct
     public void setConfigure() throws Exception {
         configuration.setSharedVariable("basePath", "/nepadmin/views/");
-        configuration.setSharedVariable("dictValue", new DictValueEx());
         configuration.setSharedVariable("dict", new DictTag());
 
         logger.debug("freemarker配置");
