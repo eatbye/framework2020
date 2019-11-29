@@ -8,6 +8,13 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">城市：</label>
+            <div class="layui-input-block">
+                <@dict type="radio" name="city" dictName="城市" value="${family.city}" firstValue="-请选择-"> </@dict>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
             <label class="layui-form-label febs-form-item-require">地址：</label>
             <div class="layui-input-block">
                 <input type="text" name="address" maxlength="50" lay-verify="required" autocomplete="off" class="layui-input" value="${family.address}">
@@ -25,6 +32,7 @@
                 <input type="text" name="area" autocomplete="off" class="layui-input" value="${family.area}">
             </div>
         </div>
+
         <div class="layui-form-item febs-hide" style="display: none">
             <button class="layui-btn" lay-submit="" lay-filter="job-add-form-submit" id="submit"></button>
             <button type="reset" class="layui-btn" id="reset"></button>

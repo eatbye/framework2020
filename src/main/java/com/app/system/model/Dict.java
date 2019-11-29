@@ -1,5 +1,7 @@
 package com.app.system.model;
 
+import com.app.sqds.util.StringUtils;
+
 import javax.persistence.*;
 
 /**
@@ -75,5 +77,14 @@ public class Dict {
 
     public void setParentDict(Dict parentDict) {
         this.parentDict = parentDict;
+    }
+
+    @Transient
+    public String getColorName(){
+        if(StringUtils.isEmpty(color)){
+            return name;
+        }else{
+            return "<span style='color:"+color+"'>"+ name +"</span>";
+        }
     }
 }

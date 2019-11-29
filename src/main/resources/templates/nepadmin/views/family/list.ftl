@@ -19,6 +19,8 @@
                             <@shiro.hasPermission name="family:edit">
                             <button class="layui-btn layui-btn-sm" id="add" type="button">登记</button>
                             </@shiro.hasPermission>
+
+                            <@dict type="selected" name="性别" value="1"/>
                         </form>
                     </div>
                     <table class="layui-table" id="list-table" lay-filter="list-table"></table>

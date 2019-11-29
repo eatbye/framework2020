@@ -5,6 +5,7 @@ import com.app.system.model.Dict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Vector;
 
 /**
  * 字典管理
@@ -23,6 +24,17 @@ public class DictService extends HibernateDao<Dict> {
         return list(hql, parentId);
     }
 
+    /**
+     * 根据字典名称获取
+     * @param name
+     * @return
+     */
+    public Dict getDictByName(String name) {
+        String hql = "from Dict where name=?";
+        return getSingleResult(hql, name);
+    }
+
+
     public void saveDict(Dict dict, List<Dict> sonDictList, List<Integer> removeIdList) {
         save(dict);
         for(Dict sonDict : sonDictList){
@@ -40,4 +52,20 @@ public class DictService extends HibernateDao<Dict> {
         }
         delete(id);
     }
+
+    /**
+     * 根据上一级字典，去的下级所有字典
+     * @param name
+     * @return
+     */
+    public List<Dict> listByParentName(String name) {
+        Dict dict = getDictByName(name);
+        if(dict == null){
+            return new Vector<Dict>();
+        }else{
+            List<Dict> dictList = getList(dict.getId());
+            return dictList;
+        }
+    }
+
 }
