@@ -3,7 +3,9 @@ package com.app.system.web;
 import com.app.sqds.util.ParamUtils;
 import com.app.sqds.util.SqdsResponse;
 import com.app.sqds.util.StringUtils;
+import com.app.system.model.LoginLog;
 import com.app.system.model.User;
+import com.app.system.service.LoginLogService;
 import com.app.system.service.MenuService;
 import com.app.system.util.CaptchaUtil;
 import com.app.system.util.MenuTree;
@@ -33,6 +35,7 @@ public class CommonController {
     private Logger logger = LoggerFactory.getLogger(CommonController.class);
 
     @Autowired private MenuService menuService;
+    @Autowired private LoginLogService loginLogService;
 
     /**
      * 用户登录
@@ -77,7 +80,15 @@ public class CommonController {
 
         logger.debug("subject = {}", subject);
         try {
+            //进行登录校验
             subject.login(token);
+
+            //登录成功后保存登录日志
+            LoginLog loginLog = new LoginLog();
+            loginLog.setUsername(username);
+            loginLog.setSystemBrowserInfo();
+            loginLogService.save(loginLog);
+
             return new SqdsResponse().success();
         } catch (UnknownAccountException e) {
             return new SqdsResponse().fail().message(e.getMessage());

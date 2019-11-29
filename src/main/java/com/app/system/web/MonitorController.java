@@ -1,10 +1,8 @@
 package com.app.system.web;
 
-import com.app.sqds.util.Constant;
-import com.app.sqds.util.PageData;
-import com.app.sqds.util.ParamUtils;
-import com.app.sqds.util.SqdsResponse;
+import com.app.sqds.util.*;
 import com.app.system.model.ActiveUser;
+import com.app.system.service.LoginLogService;
 import com.app.system.service.SessionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -30,6 +28,7 @@ public class MonitorController {
     private Logger logger = LoggerFactory.getLogger(MonitorController.class);
 
     @Autowired private SessionService sessionService;
+    @Autowired private LoginLogService loginLogService;
 
     @RequestMapping("online")
     public void online() {
@@ -59,5 +58,36 @@ public class MonitorController {
         sessionService.forceLogout(id);
         return new SqdsResponse().success();
 
+    }
+
+    /**
+     * 登录日志
+     */
+    @RequestMapping("loginLog")
+    public void loginLog(){
+
+    }
+
+    /**
+     * 登录日志数据
+     * @return
+     */
+    @RequestMapping("loginLogListData")
+    @ResponseBody
+    public PageData loginLogListData(PageInfo pageInfo){
+        pageInfo = loginLogService.loginLogList(pageInfo);
+        return pageInfo.toPageData();
+    }
+
+    /**
+     * 删除登录日志
+     * @return
+     */
+    @RequestMapping("deleteLoginId")
+    @ResponseBody
+    public SqdsResponse deleteLoginId(){
+        long id = ParamUtils.getLong("id",0);
+        loginLogService.delete(id);
+        return new SqdsResponse().success();
     }
 }

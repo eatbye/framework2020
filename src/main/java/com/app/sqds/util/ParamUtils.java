@@ -79,6 +79,9 @@ public class ParamUtils {
         }
     }
 
+    public static long getLong(String s, long defaultLong) {
+        return ParamUtils.getLong(getRequest(), s, defaultLong);
+    }
 
     /**
      * 取得表单提交的数据，返回long类型
