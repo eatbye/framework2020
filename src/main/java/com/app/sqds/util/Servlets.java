@@ -33,7 +33,7 @@ public class Servlets {
         Enumeration<String> enumeration = request.getParameterNames();
         while (enumeration.hasMoreElements()) {
             String name = enumeration.nextElement();
-            logger.debug("name = {}",name);
+//            logger.debug("name = {}",name);
             String value = ParamUtils.getString(name,"");
             pageInfo.getPostValue().put(name, value);
             /*

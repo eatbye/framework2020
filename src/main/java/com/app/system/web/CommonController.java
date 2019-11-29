@@ -116,7 +116,7 @@ public class CommonController {
         CaptchaUtil.outPng(110, 34, 4, Captcha.TYPE_ONLY_NUMBER, request, response);
     }
 
-    @RequestMapping("nepadmin/views/layout")
+    @RequestMapping("admin/views/layout")
     public void layout(Model model){
         // 登录成后，即可通过Subject获取登录的用户信息
         User user = (User) SecurityUtils.getSubject().getPrincipal();

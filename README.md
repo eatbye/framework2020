@@ -15,4 +15,4 @@
 -[ ] 图片水印
 -[ ] 统计图表
 -[ ] 导出Excel
--[ ] nepadmin改为admin
+-[x] nepadmin改为admin

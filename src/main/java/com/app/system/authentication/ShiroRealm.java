@@ -47,8 +47,8 @@ public class ShiroRealm extends AuthorizingRealm {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         Integer userId = user.getId();
 
-        logger.debug("---------##-----------------");
-        logger.debug("userId = {}", userId);
+//        logger.debug("---------##-----------------");
+//        logger.debug("userId = {}", userId);
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 

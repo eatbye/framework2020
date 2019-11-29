@@ -22,7 +22,7 @@ public class FreemarkerConfig {
 
     @PostConstruct
     public void setConfigure() throws Exception {
-        configuration.setSharedVariable("basePath", "/nepadmin/views/");
+        configuration.setSharedVariable("basePath", "/admin/views/");
         configuration.setSharedVariable("dict", new DictTag());
 
         logger.debug("freemarker配置");

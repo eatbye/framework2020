@@ -1,7 +1,7 @@
 <div class="layui-fluid layui-anim febs-anim" id="febs-error-403" lay-title="403">
     <div class="layui-row layui-col-space10" style="margin-top:100px">
         <div class="layui-col-xs3 layui-col-xs-offset2">
-            <img src="/nepadmin/images/error/403.svg" alt="" width="85%"/>
+            <img src="/admin/images/error/403.svg" alt="" width="85%"/>
         </div>
         <div class="layui-col-xs7">
             <h1 style="font-size: 60px">403</h1>
