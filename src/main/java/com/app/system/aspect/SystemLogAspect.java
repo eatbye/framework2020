@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,9 @@ import java.lang.reflect.Method;
 public class SystemLogAspect  extends AspectSupport{
     private Logger logger = LoggerFactory.getLogger(SystemLogAspect.class);
 
+    @Value("${log.system.enable}")
+    private Boolean logSystemEnable; // 注入普通字符串
+
     @Autowired
     private SystemLogService systemLogService;
 
@@ -32,20 +36,24 @@ public class SystemLogAspect  extends AspectSupport{
      */
     @Around("@annotation(org.apache.shiro.authz.annotation.RequiresPermissions)")
     public Object systemLog(ProceedingJoinPoint point){
-        Method targetMethod = resolveMethod(point);
         Object ret = null;
-        RequiresPermissions annotation = targetMethod.getAnnotation(RequiresPermissions.class);
-        String[] values = annotation.value();
-        String operation = "";
-        for(String value : values){
-            operation += value;
-        }
 
-        long start = System.currentTimeMillis();
         try {
             ret = point.proceed(point.getArgs());
-            HttpServletRequest request = ParamUtils.getRequest();
-            systemLogService.saveLog(point, targetMethod, request, operation, start);
+            if(logSystemEnable){
+                long start = System.currentTimeMillis();
+                Method targetMethod = resolveMethod(point);
+                //只有需要权限的方法，才进行日志记录
+                RequiresPermissions annotation = targetMethod.getAnnotation(RequiresPermissions.class);
+                String[] values = annotation.value();
+                String operation = "";
+                for(String value : values){
+                    operation += value;
+                }
+
+                HttpServletRequest request = ParamUtils.getRequest();
+                systemLogService.saveLog(point, targetMethod, request, operation, start);
+            }
         }catch (Throwable throwable){
 
         }

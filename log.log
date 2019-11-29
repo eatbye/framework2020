@@ -1,0 +1,157 @@
+2019-11-29 13:47:00.232  INFO 4415 --- [main] com.app.AppApplication                   : Starting AppApplication on ccjdeMacBook-Pro.local with PID 4415 (/Users/ccj/Documents/Project/Company/framework/framework2020/target/classes started by ccj in /Users/ccj/Documents/Project/Company/framework/framework2020)
+2019-11-29 13:47:00.236 DEBUG 4415 --- [main] com.app.AppApplication                   : Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2019-11-29 13:47:00.236  INFO 4415 --- [main] com.app.AppApplication                   : No active profile set, falling back to default profiles: default
+2019-11-29 13:47:05.103 DEBUG 4415 --- [main] c.app.system.authentication.ShiroConfig  : shiroProperties = ShiroProperties{sessionTimeout=3600, cookieTimeout=86400, anonUrl='/test/**,/json/**,/layui/**,/nepadmin/**,/images/**,/images/captcha,/regist,/login/**,/druid/**,/unauthorized', loginUrl='/login/login', successUrl='/', logoutUrl='/logout', unauthorizedUrl='/unauthorized'}
+2019-11-29 13:47:06.493 DEBUG 4415 --- [main] com.app.sqds.config.FreemarkerConfig     : freemarker配置
+2019-11-29 13:47:06.817 DEBUG 4415 --- [main] c.a.s.config.ShiroTagFreeMarkerConfig    : shiro freemarker 
+2019-11-29 13:47:08.845 DEBUG 4415 --- [pool-4-thread-1] com.app.app.task.DemoTask                : framework 2020
+2019-11-29 13:47:08.908  INFO 4415 --- [main] com.app.AppApplication                   : Started AppApplication in 19.089 seconds (JVM running for 28.098)
+2019-11-29 13:47:26.543 DEBUG 4415 --- [http-nio-8080-exec-1] com.app.system.web.CommonController      : user = com.app.system.model.User@7ddd1b5
+2019-11-29 13:47:26.836 DEBUG 4415 --- [http-nio-8080-exec-1] com.app.system.web.CommonController      : layout
+2019-11-29 13:47:26.935 DEBUG 4415 --- [http-nio-8080-exec-6] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:47:26.936 DEBUG 4415 --- [http-nio-8080-exec-6] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:47:27.194 DEBUG 4415 --- [http-nio-8080-exec-6] com.app.app.web.FamilyController         : --------------
+2019-11-29 13:47:27.295 DEBUG 4415 --- [http-nio-8080-exec-6] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:47:27.295 DEBUG 4415 --- [http-nio-8080-exec-6] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:47:27.297 DEBUG 4415 --- [http-nio-8080-exec-6] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:47:27.297 DEBUG 4415 --- [http-nio-8080-exec-6] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:47:27.297 DEBUG 4415 --- [http-nio-8080-exec-6] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:47:27.298 DEBUG 4415 --- [http-nio-8080-exec-6] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:47:27.340 DEBUG 4415 --- [http-nio-8080-exec-7] com.app.sqds.util.Servlets               : name = page
+2019-11-29 13:47:27.340 DEBUG 4415 --- [http-nio-8080-exec-7] com.app.sqds.util.Servlets               : name = size
+2019-11-29 13:47:27.345 DEBUG 4415 --- [http-nio-8080-exec-7] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:47:27.345 DEBUG 4415 --- [http-nio-8080-exec-7] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:47:27.365 DEBUG 4415 --- [http-nio-8080-exec-7] com.app.sqds.hibernate.SearchFilter      : search parse...
+2019-11-29 13:47:27.365 DEBUG 4415 --- [http-nio-8080-exec-7] com.app.sqds.hibernate.HibernateDao      : dynamicHql= 1=1 
+2019-11-29 13:47:27.365 DEBUG 4415 --- [http-nio-8080-exec-7] com.app.sqds.hibernate.HibernateDao      : compileHql=from Family where 1=1  and  1=1  order by   id desc
+2019-11-29 13:47:28.970 DEBUG 4415 --- [http-nio-8080-exec-8] com.app.sqds.util.Servlets               : name = page
+2019-11-29 13:47:28.970 DEBUG 4415 --- [http-nio-8080-exec-8] com.app.sqds.util.Servlets               : name = size
+2019-11-29 13:47:28.971 DEBUG 4415 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:47:28.971 DEBUG 4415 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:47:28.972 DEBUG 4415 --- [http-nio-8080-exec-8] com.app.sqds.hibernate.SearchFilter      : search parse...
+2019-11-29 13:47:28.972 DEBUG 4415 --- [http-nio-8080-exec-8] com.app.sqds.hibernate.HibernateDao      : dynamicHql= 1=1 
+2019-11-29 13:47:28.972 DEBUG 4415 --- [http-nio-8080-exec-8] com.app.sqds.hibernate.HibernateDao      : compileHql=from Family where 1=1  and  1=1  order by   id desc
+2019-11-29 13:48:08.848 DEBUG 4415 --- [pool-4-thread-1] com.app.app.task.DemoTask                : framework 2020
+2019-11-29 13:49:08.851 DEBUG 4415 --- [pool-4-thread-1] com.app.app.task.DemoTask                : framework 2020
+2019-11-29 13:50:08.989 DEBUG 4415 --- [pool-4-thread-1] com.app.app.task.DemoTask                : framework 2020
+2019-11-29 13:50:32.841 DEBUG 4415 --- [http-nio-8080-exec-4] com.app.system.web.CommonController      : user = com.app.system.model.User@7ddd1b5
+2019-11-29 13:50:33.126 DEBUG 4415 --- [http-nio-8080-exec-9] com.app.system.web.CommonController      : layout
+2019-11-29 13:50:33.205 DEBUG 4415 --- [http-nio-8080-exec-1] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:50:33.206 DEBUG 4415 --- [http-nio-8080-exec-1] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:50:33.230 DEBUG 4415 --- [http-nio-8080-exec-1] com.app.system.aspect.SystemLogAspect    : logSystemEnable = null
+2019-11-29 13:50:33.232 DEBUG 4415 --- [http-nio-8080-exec-1] com.app.app.web.FamilyController         : --------------
+2019-11-29 13:50:33.304 DEBUG 4415 --- [http-nio-8080-exec-1] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:50:33.304 DEBUG 4415 --- [http-nio-8080-exec-1] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:50:33.304 DEBUG 4415 --- [http-nio-8080-exec-1] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:50:33.304 DEBUG 4415 --- [http-nio-8080-exec-1] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:50:33.305 DEBUG 4415 --- [http-nio-8080-exec-1] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:50:33.305 DEBUG 4415 --- [http-nio-8080-exec-1] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:50:33.357 DEBUG 4415 --- [http-nio-8080-exec-4] com.app.sqds.util.Servlets               : name = page
+2019-11-29 13:50:33.359 DEBUG 4415 --- [http-nio-8080-exec-4] com.app.sqds.util.Servlets               : name = size
+2019-11-29 13:50:33.371 DEBUG 4415 --- [http-nio-8080-exec-4] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:50:33.372 DEBUG 4415 --- [http-nio-8080-exec-4] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:50:33.373 DEBUG 4415 --- [http-nio-8080-exec-4] com.app.system.aspect.SystemLogAspect    : logSystemEnable = null
+2019-11-29 13:50:33.376 DEBUG 4415 --- [http-nio-8080-exec-4] com.app.sqds.hibernate.SearchFilter      : search parse...
+2019-11-29 13:50:33.377 DEBUG 4415 --- [http-nio-8080-exec-4] com.app.sqds.hibernate.HibernateDao      : dynamicHql= 1=1 
+2019-11-29 13:50:33.377 DEBUG 4415 --- [http-nio-8080-exec-4] com.app.sqds.hibernate.HibernateDao      : compileHql=from Family where 1=1  and  1=1  order by   id desc
+2019-11-29 13:51:14.894  INFO 5289 --- [main] com.app.AppApplication                   : Starting AppApplication on ccjdeMacBook-Pro.local with PID 5289 (/Users/ccj/Documents/Project/Company/framework/framework2020/target/classes started by ccj in /Users/ccj/Documents/Project/Company/framework/framework2020)
+2019-11-29 13:51:14.899 DEBUG 5289 --- [main] com.app.AppApplication                   : Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2019-11-29 13:51:14.900  INFO 5289 --- [main] com.app.AppApplication                   : No active profile set, falling back to default profiles: default
+2019-11-29 13:51:19.738 DEBUG 5289 --- [main] c.app.system.authentication.ShiroConfig  : shiroProperties = ShiroProperties{sessionTimeout=3600, cookieTimeout=86400, anonUrl='/test/**,/json/**,/layui/**,/nepadmin/**,/images/**,/images/captcha,/regist,/login/**,/druid/**,/unauthorized', loginUrl='/login/login', successUrl='/', logoutUrl='/logout', unauthorizedUrl='/unauthorized'}
+2019-11-29 13:51:21.150 DEBUG 5289 --- [main] com.app.sqds.config.FreemarkerConfig     : freemarker配置
+2019-11-29 13:51:21.220 ERROR 5289 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'systemLogAspect': Unsatisfied dependency expressed through field 'logSystemEnable'; nested exception is org.springframework.beans.TypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Boolean'; nested exception is java.lang.IllegalArgumentException: Invalid boolean value [log.system.enable]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:588) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:366) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1264) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.__refresh(AbstractApplicationContext.java:543) ~[spring-context-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.jrLockAndRefresh(AbstractApplicationContext.java:40002) ~[spring-context-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:41008) ~[spring-context-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122) ~[spring-boot-1.5.9.RELEASE.jar:1.5.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693) [spring-boot-1.5.9.RELEASE.jar:1.5.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360) [spring-boot-1.5.9.RELEASE.jar:1.5.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) [spring-boot-1.5.9.RELEASE.jar:1.5.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) [spring-boot-1.5.9.RELEASE.jar:1.5.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) [spring-boot-1.5.9.RELEASE.jar:1.5.9.RELEASE]
+	at com.app.AppApplication.main(AppApplication.java:14) [classes/:na]
+Caused by: org.springframework.beans.TypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Boolean'; nested exception is java.lang.IllegalArgumentException: Invalid boolean value [log.system.enable]
+	at org.springframework.beans.TypeConverterSupport.doConvert(TypeConverterSupport.java:77) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:54) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1092) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1066) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:585) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	... 21 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Invalid boolean value [log.system.enable]
+	at org.springframework.beans.propertyeditors.CustomBooleanEditor.setAsText(CustomBooleanEditor.java:123) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.TypeConverterDelegate.doConvertTextValue(TypeConverterDelegate.java:468) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.TypeConverterDelegate.doConvertValue(TypeConverterDelegate.java:441) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:199) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:125) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.beans.TypeConverterSupport.doConvert(TypeConverterSupport.java:61) ~[spring-beans-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	... 25 common frames omitted
+
+2019-11-29 13:52:04.063  INFO 5518 --- [main] com.app.AppApplication                   : Starting AppApplication on ccjdeMacBook-Pro.local with PID 5518 (/Users/ccj/Documents/Project/Company/framework/framework2020/target/classes started by ccj in /Users/ccj/Documents/Project/Company/framework/framework2020)
+2019-11-29 13:52:04.067 DEBUG 5518 --- [main] com.app.AppApplication                   : Running with Spring Boot v1.5.9.RELEASE, Spring v4.3.13.RELEASE
+2019-11-29 13:52:04.067  INFO 5518 --- [main] com.app.AppApplication                   : No active profile set, falling back to default profiles: default
+2019-11-29 13:52:08.881 DEBUG 5518 --- [main] c.app.system.authentication.ShiroConfig  : shiroProperties = ShiroProperties{sessionTimeout=3600, cookieTimeout=86400, anonUrl='/test/**,/json/**,/layui/**,/nepadmin/**,/images/**,/images/captcha,/regist,/login/**,/druid/**,/unauthorized', loginUrl='/login/login', successUrl='/', logoutUrl='/logout', unauthorizedUrl='/unauthorized'}
+2019-11-29 13:52:10.223 DEBUG 5518 --- [main] com.app.sqds.config.FreemarkerConfig     : freemarker配置
+2019-11-29 13:52:10.518 DEBUG 5518 --- [main] c.a.s.config.ShiroTagFreeMarkerConfig    : shiro freemarker 
+2019-11-29 13:52:12.300 DEBUG 5518 --- [pool-4-thread-1] com.app.app.task.DemoTask                : framework 2020
+2019-11-29 13:52:12.365  INFO 5518 --- [main] com.app.AppApplication                   : Started AppApplication in 18.686 seconds (JVM running for 28.349)
+2019-11-29 13:52:20.626 DEBUG 5518 --- [http-nio-8080-exec-1] com.app.system.web.CommonController      : user = com.app.system.model.User@11c56ff1
+2019-11-29 13:52:21.004 DEBUG 5518 --- [http-nio-8080-exec-6] com.app.system.web.CommonController      : layout
+2019-11-29 13:52:21.109 DEBUG 5518 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:52:21.110 DEBUG 5518 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:52:21.386 DEBUG 5518 --- [http-nio-8080-exec-8] com.app.system.aspect.SystemLogAspect    : logSystemEnable = true
+2019-11-29 13:52:21.400 DEBUG 5518 --- [http-nio-8080-exec-8] com.app.app.web.FamilyController         : --------------
+2019-11-29 13:52:21.518 DEBUG 5518 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:52:21.518 DEBUG 5518 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:52:21.519 DEBUG 5518 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:52:21.520 DEBUG 5518 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:52:21.520 DEBUG 5518 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:52:21.520 DEBUG 5518 --- [http-nio-8080-exec-8] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:52:21.566 DEBUG 5518 --- [http-nio-8080-exec-2] com.app.sqds.util.Servlets               : name = page
+2019-11-29 13:52:21.566 DEBUG 5518 --- [http-nio-8080-exec-2] com.app.sqds.util.Servlets               : name = size
+2019-11-29 13:52:21.572 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:52:21.573 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:52:21.573 DEBUG 5518 --- [http-nio-8080-exec-2] com.app.system.aspect.SystemLogAspect    : logSystemEnable = true
+2019-11-29 13:52:21.598 DEBUG 5518 --- [http-nio-8080-exec-2] com.app.sqds.hibernate.SearchFilter      : search parse...
+2019-11-29 13:52:21.599 DEBUG 5518 --- [http-nio-8080-exec-2] com.app.sqds.hibernate.HibernateDao      : dynamicHql= 1=1 
+2019-11-29 13:52:21.599 DEBUG 5518 --- [http-nio-8080-exec-2] com.app.sqds.hibernate.HibernateDao      : compileHql=from Family where 1=1  and  1=1  order by   id desc
+2019-11-29 13:53:12.306 DEBUG 5518 --- [pool-4-thread-1] com.app.app.task.DemoTask                : framework 2020
+2019-11-29 13:54:03.236 DEBUG 5518 --- [http-nio-8080-exec-5] com.app.system.web.CommonController      : user = com.app.system.model.User@11c56ff1
+2019-11-29 13:54:03.589 DEBUG 5518 --- [http-nio-8080-exec-10] com.app.system.web.CommonController      : layout
+2019-11-29 13:54:03.668 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:54:03.668 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:54:03.683 DEBUG 5518 --- [http-nio-8080-exec-2] com.app.app.web.FamilyController         : --------------
+2019-11-29 13:54:03.765 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:54:03.765 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:54:03.766 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:54:03.766 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:54:03.766 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:54:03.766 DEBUG 5518 --- [http-nio-8080-exec-2] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:54:03.821 DEBUG 5518 --- [http-nio-8080-exec-5] com.app.sqds.util.Servlets               : name = page
+2019-11-29 13:54:03.821 DEBUG 5518 --- [http-nio-8080-exec-5] com.app.sqds.util.Servlets               : name = size
+2019-11-29 13:54:03.833 DEBUG 5518 --- [http-nio-8080-exec-5] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:54:03.833 DEBUG 5518 --- [http-nio-8080-exec-5] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:54:03.836 DEBUG 5518 --- [http-nio-8080-exec-5] com.app.sqds.hibernate.SearchFilter      : search parse...
+2019-11-29 13:54:03.836 DEBUG 5518 --- [http-nio-8080-exec-5] com.app.sqds.hibernate.HibernateDao      : dynamicHql= 1=1 
+2019-11-29 13:54:03.837 DEBUG 5518 --- [http-nio-8080-exec-5] com.app.sqds.hibernate.HibernateDao      : compileHql=from Family where 1=1  and  1=1  order by   id desc
+2019-11-29 13:54:04.835 DEBUG 5518 --- [http-nio-8080-exec-7] com.app.sqds.util.Servlets               : name = page
+2019-11-29 13:54:04.836 DEBUG 5518 --- [http-nio-8080-exec-7] com.app.sqds.util.Servlets               : name = size
+2019-11-29 13:54:04.837 DEBUG 5518 --- [http-nio-8080-exec-7] c.app.system.authentication.ShiroRealm   : ---------##-----------------
+2019-11-29 13:54:04.837 DEBUG 5518 --- [http-nio-8080-exec-7] c.app.system.authentication.ShiroRealm   : userId = 1
+2019-11-29 13:54:04.839 DEBUG 5518 --- [http-nio-8080-exec-7] com.app.sqds.hibernate.SearchFilter      : search parse...
+2019-11-29 13:54:04.839 DEBUG 5518 --- [http-nio-8080-exec-7] com.app.sqds.hibernate.HibernateDao      : dynamicHql= 1=1 
+2019-11-29 13:54:04.839 DEBUG 5518 --- [http-nio-8080-exec-7] com.app.sqds.hibernate.HibernateDao      : compileHql=from Family where 1=1  and  1=1  order by   id desc
+2019-11-29 13:54:12.302 DEBUG 5518 --- [pool-4-thread-1] com.app.app.task.DemoTask                : framework 2020
