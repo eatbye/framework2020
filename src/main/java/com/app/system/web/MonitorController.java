@@ -4,6 +4,7 @@ import com.app.sqds.util.*;
 import com.app.system.model.ActiveUser;
 import com.app.system.service.LoginLogService;
 import com.app.system.service.SessionService;
+import com.app.system.service.SystemLogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,13 +30,21 @@ public class MonitorController {
 
     @Autowired private SessionService sessionService;
     @Autowired private LoginLogService loginLogService;
+    @Autowired private SystemLogService systemLogService;
 
+    /**
+     * 在线用户
+     */
     @RequestMapping("online")
     public void online() {
         logger.debug("online");
     }
 
-
+    /**
+     * 在线用户列表
+     * @param username
+     * @return
+     */
     @RequestMapping("onlineList")
     @ResponseBody
     public PageData list(String username) {
@@ -90,4 +99,37 @@ public class MonitorController {
         loginLogService.delete(id);
         return new SqdsResponse().success();
     }
+
+
+    /**
+     * 系统操作日志
+     */
+    @RequestMapping("systemLog")
+    public void systemLog(){
+
+    }
+
+    /**
+     * 系统操作日志数据
+     * @return
+     */
+    @RequestMapping("systemLogListData")
+    @ResponseBody
+    public PageData systemLogListData(PageInfo pageInfo){
+        pageInfo = systemLogService.logList(pageInfo);
+        return pageInfo.toPageData();
+    }
+
+    /**
+     * 删除系统操作日志
+     * @return
+     */
+    @RequestMapping("deleteSystemLog")
+    @ResponseBody
+    public SqdsResponse deleteSystemLog(){
+        long id = ParamUtils.getLong("id",0);
+        systemLogService.delete(id);
+        return new SqdsResponse().success();
+    }
+
 }

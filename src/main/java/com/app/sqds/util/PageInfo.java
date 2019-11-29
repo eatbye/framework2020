@@ -351,4 +351,20 @@ public class PageInfo<T> {
         }
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "PageInfo{" +
+                "pageNo=" + pageNo +
+                ", pageSize=" + pageSize +
+                ", orderField='" + orderField + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", orderBy='" + orderBy + '\'' +
+                ", order='" + order + '\'' +
+                ", autoCount=" + autoCount +
+                ", result=" + result +
+                ", totalCount=" + totalCount +
+                ", postValue=" + postValue +
+                '}';
+    }
 }
