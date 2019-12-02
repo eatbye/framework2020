@@ -10,7 +10,7 @@ import java.util.List;
  * @author ccj
  */
 @Entity
-@Table(name="menu")
+@Table(name="sys_menu")
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @author ccj
  */
 @Entity
-@Table(name="dict")
+@Table(name="sys_dict")
 public class Dict {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

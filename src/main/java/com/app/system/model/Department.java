@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @author ccj
  */
 @Entity
-@Table(name="department")
+@Table(name="sys_department")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

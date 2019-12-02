@@ -13,7 +13,7 @@ import java.util.Date;
  * 登录日志
  */
 @Entity
-@Table(name="login_log")
+@Table(name="sys_login_log")
 public class LoginLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

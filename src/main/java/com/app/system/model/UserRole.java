@@ -6,7 +6,7 @@ import javax.persistence.*;
  * 用户角色表
  */
 @Entity
-@Table(name = "user_role")
+@Table(name = "sys_user_role")
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

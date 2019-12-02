@@ -10,7 +10,7 @@ import java.util.Date;
  * 用户
  */
 @Entity
-@Table(name = "user")
+@Table(name = "sys_user")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

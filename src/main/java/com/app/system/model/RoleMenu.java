@@ -5,7 +5,7 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "roleMenu")
+@Table(name = "sys_role_menu")
 public class RoleMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
