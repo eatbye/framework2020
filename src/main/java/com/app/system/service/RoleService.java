@@ -10,7 +10,9 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 角色
@@ -23,7 +25,7 @@ public class RoleService extends HibernateDao<Role> {
 
     public List<Role> list() {
         String hql = "from Role r order by r.sort, r.id";
-        return list(hql);
+        return list(hql, new HashMap<>());
     }
 
     @CacheEvict(value = {"role","menu"}, allEntries = true)
@@ -57,7 +59,10 @@ public class RoleService extends HibernateDao<Role> {
      */
     @Cacheable(value = "role")
     public List<Role> findUserRole(int userId){
-        String hql = "select r from UserRole ur, Role r where ur.role.id=r.id and ur.user.id=?  ";
-        return getSession().createQuery(hql).setInteger(0,userId).list();
+        String hql = "select r from UserRole ur, Role r where ur.role.id=r.id and ur.user.id=:userId ";
+//        return getSession().createQuery(hql).setInteger(0,userId).list();
+        Map<String,Object> values = new HashMap<>();
+        values.put("userId",userId);
+        return list(hql, values);
     }
 }

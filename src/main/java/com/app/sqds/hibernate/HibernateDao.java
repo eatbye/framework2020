@@ -8,7 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
 import org.hibernate.internal.CriteriaImpl;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.transform.ResultTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -162,7 +162,11 @@ public class HibernateDao<T> {
      * @param hql    hql语句
      * @param values 数量可变的参数
      */
-    public List<T> list(String hql, Object... values) {
+//    public List<T> list(String hql, Object... values) {
+//        return createQuery(hql, values).list();
+//    }
+
+    public List<T> list(String hql,Map<String,Object> values){
         return createQuery(hql, values).list();
     }
 
@@ -173,9 +177,9 @@ public class HibernateDao<T> {
      * @param values
      * @return
      */
-    public List<T> listCache(String hql, Object... values) {
-        return createQuery(hql, values).setCacheable(true).list();
-    }
+//    public List<T> listCache(String hql, Object... values) {
+//        return createQuery(hql, values).setCacheable(true).list();
+//    }
 
     /**
      * 按HQL分页查询.
@@ -185,6 +189,7 @@ public class HibernateDao<T> {
      * @param values   数量可变的参数.
      * @return
      */
+    /*
     public PageInfo<T> list(PageInfo<T> pageInfo, String hql, Object... values) {
 
         DynamicHql dynamicHql = getDynamicHql(pageInfo.getPostValue());
@@ -218,6 +223,47 @@ public class HibernateDao<T> {
             }
         }
         Query q = createQuery(compileHql, dynamicQueryValues.toArray());
+        if (pageInfo.isFirstSetted()) {
+            q.setFirstResult(pageInfo.getFirst());
+        }
+        if (pageInfo.isPageSizeSetted()) {
+            q.setMaxResults(pageInfo.getPageSize());
+        }
+        pageInfo.setResult(q.list());
+        return pageInfo;
+    }
+    */
+
+    public PageInfo<T> list(PageInfo<T> pageInfo, String hql, Map<String,Object> values) {
+
+//        DynamicHql dynamicHql = getDynamicHql(pageInfo.getPostValue());
+
+        String compileHql = compileHql(hql, pageInfo.getOrderField(), pageInfo.getOrderType());
+
+//        System.out.println(compileHql);
+//        List<Object> queryParameter = dynamicHql.getQueryData();
+//
+//        Object[] queryValues = values;
+//
+//        List<Object> dynamicQueryValues = new Vector<Object>();
+//
+//        for (Object o : queryValues) {
+//            dynamicQueryValues.add(o);
+//        }
+//        for (Object o : queryParameter) {
+//            dynamicQueryValues.add(o);
+//        }
+
+        if (pageInfo.isAutoCount()) {
+            long total = countQueryResult(compileHql, values);
+            pageInfo.setTotalCount((int) total);
+            //如果记录数为0，不需要进行分页查询了
+            if (total == 0) {
+                pageInfo.setResult(new Vector());
+                return pageInfo;
+            }
+        }
+        Query q = createQuery(compileHql, values);
         if (pageInfo.isFirstSetted()) {
             q.setFirstResult(pageInfo.getFirst());
         }
@@ -272,40 +318,38 @@ public class HibernateDao<T> {
     }
     */
 
-    public Long findLong(PageInfo<T> pageInfo, String hql, Object... values) {
+    public Long findLong(PageInfo<T> pageInfo, String hql, Map<String,Object> values) {
 
-        DynamicHql dynamicHql = getDynamicHql(pageInfo.getPostValue());
+//        DynamicHql dynamicHql = getDynamicHql(pageInfo.getPostValue());
 
-        String compileHql = compileHql1(dynamicHql, hql, pageInfo.getOrderField(), pageInfo.getOrderType());
+        String compileHql = compileHql1( hql, pageInfo.getOrderField(), pageInfo.getOrderType());
 
-        List<Object> queryParameter = dynamicHql.getQueryData();
+//        List<Object> queryParameter = dynamicHql.getQueryData();
+//
+//        Object[] queryValues = values;
+//
+//        List<Object> dynamicQueryValues = new Vector<Object>();
+//
+//        for (Object o : queryValues) {
+//            dynamicQueryValues.add(o);
+//        }
+//        for (Object o : queryParameter) {
+//            dynamicQueryValues.add(o);
+//        }
 
-        Object[] queryValues = values;
-
-        List<Object> dynamicQueryValues = new Vector<Object>();
-
-        for (Object o : queryValues) {
-            dynamicQueryValues.add(o);
-        }
-        for (Object o : queryParameter) {
-            dynamicQueryValues.add(o);
-        }
-
-        long total = longQueryResult(compileHql, dynamicQueryValues.toArray());
+        long total = longQueryResult(compileHql, values);
         return total;
     }
 
     /**
      * 查询条件预编译处理
      *
-     * @param dynamicHql 动态hql对象
      * @param hql        用户调用的hql
      * @param orderField 排序字段
      * @param orderType  排序类型
      * @return
      */
-    private String compileHql(DynamicHql dynamicHql, String hql, String orderField, String orderType) {
-        String whereHql = dynamicHql.getHql();
+    private String compileHql(String hql, String orderField, String orderType) {
         String orderHql = "";
         if (StringUtils.isNotEmpty(orderField) && StringUtils.isNotEmpty(orderType)) {
             orderHql = " " + orderField + " " + orderType + " ";
@@ -323,21 +367,16 @@ public class HibernateDao<T> {
             oldOrder = hqlArray[1].replaceAll("by", "");
         }
 
-        if (oldHql.indexOf("where") == -1) {
-            oldHql += " where ";
-        } else {
-            oldHql += " and ";
-        }
         if (StringUtils.isNotEmpty(orderHql)) {
             oldOrder = orderHql + "," + oldOrder;
         }
 //        return oldHql + whereHql;
-        return oldHql + whereHql + " order by " + oldOrder;
+        return oldHql + " order by " + oldOrder;
     }
 
 
-    private String compileHql1(DynamicHql dynamicHql, String hql, String orderField, String orderType) {
-        String whereHql = dynamicHql.getHql();
+    private String compileHql1( String hql, String orderField, String orderType) {
+//        String whereHql = dynamicHql.getHql();
         String orderHql = "";
         if (StringUtils.isNotEmpty(orderField) && StringUtils.isNotEmpty(orderType)) {
             orderHql = " " + orderField + " " + orderType + " ";
@@ -363,7 +402,7 @@ public class HibernateDao<T> {
         if (StringUtils.isNotEmpty(orderHql)) {
             oldOrder = orderHql + "," + oldOrder;
         }
-        return oldHql + whereHql;
+        return oldHql ;
     }
 
     /**
@@ -372,6 +411,7 @@ public class HibernateDao<T> {
      * @param searchParams
      * @return
      */
+    /*
     private DynamicHql getDynamicHql(Map<String, Object> searchParams) {
         Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
 
@@ -386,6 +426,8 @@ public class HibernateDao<T> {
         return new DynamicHql(searchFilterList);
     }
 
+     */
+
 
     /**
      * 从缓存中取得数据库查询结果
@@ -395,6 +437,7 @@ public class HibernateDao<T> {
      * @param values
      * @return
      */
+    /*
     public PageInfo<T> listCache(PageInfo<T> page, String hql, Object... values) {
         if (page.isAutoCount()) {
             long total = countQueryResultCache(hql, values);
@@ -418,7 +461,9 @@ public class HibernateDao<T> {
         return page;
     }
 
-    public long countQueryResult(String hql, Object... values) {
+     */
+
+    public long countQueryResult(String hql, Map<String,Object> values) {
         String newHql = removeFetch(removeOrders(hql));
         String regex = "select\\s*(distinct[^,]*)(.*) from (.*)";
         Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
@@ -438,10 +483,11 @@ public class HibernateDao<T> {
      * @param values
      * @return
      */
-    public long longQueryResult(String newHql, Object... values) {
+    public long longQueryResult(String newHql, Map<String,Object> values) {
         return findLong(newHql, values);
     }
 
+    /*
     public long countQueryResultCache(String hql, Object... values) {
         String newHql = removeFetch(removeOrders(hql));
         String regex = "select\\s*(distinct[^,]*)(.*) from (.*)";
@@ -454,19 +500,20 @@ public class HibernateDao<T> {
         }
         return findLongCache(newHql, values);
     }
+    */
 
     /**
      * 按HQL查询唯一对象.
      */
-    public T findUnique(String hql, Object... values) {
+    public T findUnique(String hql, Map<String,Object> values) {
         return (T) createQuery(hql, values).uniqueResult();
     }
 
-    public T findUniqueCache(String hql, Object... values) {
-        return (T) createQuery(hql, values).setCacheable(true).uniqueResult();
-    }
+//    public T findUniqueCache(String hql, Object... values) {
+//        return (T) createQuery(hql, values).setCacheable(true).uniqueResult();
+//    }
 
-    public T getSingleResult(String hql, Object... values) {
+    public T getSingleResult(String hql, Map<String,Object> values) {
         List<T> list = createQuery(hql, values).list();
         if (list.size() > 0) {
             return list.get(0);
@@ -478,20 +525,20 @@ public class HibernateDao<T> {
     /**
      * 按HQL查询Intger类形结果.
      */
-    public Integer findInt(String hql, Object... values) {
+    public Integer findInt(String hql, Map<String,Object> values) {
         return (Integer) findUnique(hql, values);
     }
 
     /**
      * 按HQL查询Long类型结果.
      */
-    public Long findLong(String hql, Object... values) {
+    public Long findLong(String hql, Map<String,Object> values) {
         return (Long) findUnique(hql, values);
     }
 
-    public Long findLongCache(String hql, Object... values) {
-        return (Long) findUniqueCache(hql, values);
-    }
+//    public Long findLongCache(String hql, Object... values) {
+//        return (Long) findUniqueCache(hql, values);
+//    }
 
     /**
      * 按Criterion查询对象列表.
@@ -589,12 +636,27 @@ public class HibernateDao<T> {
     /**
      * 根据查询函数与参数列表创建Query对象,后续可进行更多处理,辅助函数.
      */
+    /*
     public Query createQuery(String queryString, Object... values) {
         Query queryObject = getSession().createQuery(queryString);
         if (values != null) {
             for (int i = 0; i < values.length; i++) {
                 queryObject.setParameter(i, values[i]);
             }
+        }
+        return queryObject;
+    }
+
+     */
+
+    public Query createQuery(String queryString, Map<String,Object> values){
+        logger.debug("queryString = {}", queryString);
+        Query queryObject = getSession().createQuery(queryString);
+        Iterator<String> keys = values.keySet().iterator();
+        while (keys.hasNext()){
+            String key = keys.next();
+            Object object = values.get(key);
+            queryObject.setParameter(key, object);
         }
         return queryObject;
     }

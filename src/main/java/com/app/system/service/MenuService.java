@@ -10,9 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * 菜单管理
@@ -25,9 +23,12 @@ public class MenuService extends HibernateDao<Menu> {
     public List<MenuTree> getMenuTree(Integer userId){
 
         String hql = "select distinct m from User u, UserRole ur, Role r, RoleMenu rm, Menu m where u.id=ur.user.id and ur.role.id = r.id and r.id=rm.role.id" +
-                " and rm.menu.id=m.id and m.type=1 and u.id=? order by m.sort";
+                " and rm.menu.id=m.id and m.type=1 and u.id=:userId order by m.sort";
 
-        List<Menu> menuList = list(hql, userId);
+        Map<String,Object> values = new HashMap<>();
+        values.put("userId",userId);
+
+        List<Menu> menuList = list(hql, values);
 
         List<MenuTree> menuTreeList = new Vector<>();
 
@@ -58,7 +59,7 @@ public class MenuService extends HibernateDao<Menu> {
 
     public MenuTree<Menu> findMenus() {
         String hql = "from Menu order by sort,id";
-        List<Menu> menuList = list(hql);
+        List<Menu> menuList = list(hql, new HashMap<>());
         logger.debug("menuList.size = {}", menuList.size());
         List<MenuTree<Menu>> trees = this.convertMenus(menuList);
 
@@ -97,8 +98,10 @@ public class MenuService extends HibernateDao<Menu> {
 
     @Cacheable(value = "menu")
     public List<Menu> findUserPermissions(Integer userId) {
-        String hql = "select m from UserRole ur, User u, Role r, Menu m, RoleMenu rm where ur.user.id=u.id and ur.role.id=r.id and r.id=rm.role.id and rm.menu.id=m.id and u.id=?";
-        return list(hql,userId);
+        String hql = "select m from UserRole ur, User u, Role r, Menu m, RoleMenu rm where ur.user.id=u.id and ur.role.id=r.id and r.id=rm.role.id and rm.menu.id=m.id and u.id=:userId";
+        Map<String,Object> values = new HashMap<>();
+        values.put("userId",userId);
+        return list(hql, values);
     }
 
     @CacheEvict(value = {"role","menu"}, allEntries = true)

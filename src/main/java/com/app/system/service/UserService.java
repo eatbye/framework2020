@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -25,21 +27,24 @@ public class UserService extends HibernateDao<User> {
      * @return
      */
     public PageInfo<User> list(PageInfo<User> pageInfo) {
-        List<Object> dataList = new Vector<>();
+//        List<Object> dataList = new Vector<>();
+        Map<String,Object> data = new HashMap<>();
 
         String hql = "from User u where ";
         String realName = pageInfo.getPostStringValue("realName");
         if(StringUtils.isNotEmpty(realName)){
-            hql += " realName like ? and ";
-            dataList.add("%" + realName + "%");
+            hql += " realName like :realName and ";
+//            dataList.add("%" + realName + "%");
+            data.put("realName","%" + realName + "%");
         }
         String username = pageInfo.getPostStringValue("username");
         if(StringUtils.isNotEmpty(username)){
-            hql += " username like ? and ";
-            dataList.add("%" + username + "%");
+            hql += " username like :username and ";
+            data.put("username","%" + username + "%");
+//            dataList.add("%" + username + "%");
         }
         hql += " 1=1 order by u.id desc";
-        return list(pageInfo, hql, dataList.toArray());
+        return list(pageInfo, hql, data);
     }
 
     @CacheEvict(value = {"role","menu"}, allEntries = true)
@@ -63,7 +68,13 @@ public class UserService extends HibernateDao<User> {
     }
 
     public User findByName(String userName) {
-        String hql = "from User u where u.username=?";
-        return getSingleResult(hql,userName);
+        String hql = "from User u where u.username=:username";
+        List<User> userList = getSession().createQuery(hql).setParameter("username",userName).list();
+//        return getSingleResult(hql,userName);
+        if(userList.size()>0){
+            return userList.get(0);
+        }else{
+            return null;
+        }
     }
 }

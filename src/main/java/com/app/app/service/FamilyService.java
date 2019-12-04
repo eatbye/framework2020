@@ -34,21 +34,22 @@ public class FamilyService extends HibernateDao<Family> {
     }
 
     public PageInfo<Family> familyList(PageInfo<Family> pageInfo){
-        List<Object> dataList = new Vector<>();
+//        List<Object> dataList = new Vector<>();
 
+        Map<String,Object> data = new HashMap<>();
         String hql = "from Family where";
         String name = pageInfo.getPostStringValue("name");
         if(StringUtils.isNotEmpty(name)){
-            hql += " name like ? and ";
-            dataList.add("%"+name+"%");
+            hql += " name like :name and ";
+            data.put("name","%"+name+"%");
         }
         String address = pageInfo.getPostStringValue("address");
         if(StringUtils.isNotEmpty(address)){
-            hql += " address like ? and ";
-            dataList.add("%"+address+"%");
+            hql += " address like :address and ";
+            data.put("address","%"+address+"%");
         }
         hql += " 1=1 order by id desc";
-        pageInfo = list(pageInfo, hql, dataList.toArray());
+        pageInfo = list(pageInfo, hql, data);
         return pageInfo;
     }
 }

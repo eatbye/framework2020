@@ -114,14 +114,16 @@ public class SystemLogService extends HibernateDao<SystemLog> {
     }
 
     public PageInfo logList(PageInfo pageInfo) {
-        List<Object> data = new Vector<Object>();
+//        List<Object> data = new Vector<Object>();
+        Map<String,Object> data = new HashMap<>();
         String hql = "from SystemLog l where";
         String username = pageInfo.getPostStringValue("username");
         if(StringUtils.isNotEmpty(username)){
-            hql += " username  like ? and ";
-            data.add("%"+username+"%");
+            hql += " username  like :username and ";
+//            data.add("%"+username+"%");
+            data.put("username","%"+username+"%");
         }
         hql += " 1=1 order by id desc";
-        return list(pageInfo,hql, data.toArray());
+        return list(pageInfo,hql, data);
     }
 }

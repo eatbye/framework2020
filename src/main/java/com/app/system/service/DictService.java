@@ -4,7 +4,9 @@ import com.app.sqds.hibernate.HibernateDao;
 import com.app.system.model.Dict;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -16,12 +18,14 @@ public class DictService extends HibernateDao<Dict> {
 
     public List<Dict> rootDictList() {
         String hql = "from Dict where parentDict is null order by id";
-        return list(hql);
+        return list(hql, new HashMap<>());
     }
 
     public List<Dict> getList(Integer parentId) {
-        String hql = "from Dict where parentDict.id=? order by sort,id";
-        return list(hql, parentId);
+        String hql = "from Dict where parentDict.id=:parentId order by sort,id";
+        Map<String,Object> values = new HashMap<>();
+        values.put("parentId", parentId);
+        return list(hql, values);
     }
 
     /**
@@ -30,8 +34,10 @@ public class DictService extends HibernateDao<Dict> {
      * @return
      */
     public Dict getDictByName(String name) {
-        String hql = "from Dict where name=?";
-        return getSingleResult(hql, name);
+        String hql = "from Dict where name=:name";
+        Map<String,Object> data = new HashMap<>();
+        data.put("name",name);
+        return getSingleResult(hql, data);
     }
 
 

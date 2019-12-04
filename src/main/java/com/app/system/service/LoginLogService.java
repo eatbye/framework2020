@@ -6,7 +6,9 @@ import com.app.sqds.util.StringUtils;
 import com.app.system.model.LoginLog;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -15,14 +17,16 @@ import java.util.Vector;
 @Service
 public class LoginLogService extends HibernateDao<LoginLog> {
     public PageInfo loginLogList(PageInfo pageInfo) {
-        List<Object> data = new Vector<Object>();
+        Map<String,Object> data = new HashMap<>();
+//        List<Object> data = new Vector<Object>();
         String hql = "from LoginLog l where";
         String username = pageInfo.getPostStringValue("username");
         if(StringUtils.isNotEmpty(username)){
             hql += " username  like ? and ";
-            data.add("%"+username+"%");
+            data.put("username","%"+username+"%");
         }
         hql += " 1=1 order by id desc";
-        return list(pageInfo,hql, data.toArray());
+        System.out.println(hql);
+        return list(pageInfo,hql, data);
     }
 }
